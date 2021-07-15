@@ -1,5 +1,6 @@
 import React from 'react'
 import CardDeck from './components/CardDeck'
+import CardDraw from './components/CardDraw'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         <h2>Cards</h2>
       </div>
       <CardDeck />
+      <CardDraw />
     </div>
   )
 }
