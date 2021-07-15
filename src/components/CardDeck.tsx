@@ -1,56 +1,73 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { db } from '../config/firebase'
 
 type Card = {
-  name: string
-  color: string
-}
-
-type Deck = {
-  cards: Card[]
+  mark: string
+  number: number
 }
 
 const CardDeck = () => {
-  const [deck, setDeck] = useState<Deck>({ cards: [] })
+  const trumpRef = db.collection('trump')
+  const [deck, setDeck] = useState<Card[]>([])
 
-  useEffect(() => {
-    // 52枚のトランプを生成してfireStoreに登録する
-    const deckRef = db.collection('trump card').doc('deck')
-    const cards: Card[] = [
-      { name: '♠', color: '#000000' },
-      { name: '♥', color: '#ff0000' },
-      { name: '♦', color: '#ff0000' },
-      { name: '♣', color: '#000000' }
-    ]
-      .map((suit) => [
-        ...Array.from(Array(13).keys()).map((i) => {
-          return { name: suit.name + (i + 1), color: suit.color }
+  // トランプをFireStoreに追加する
+  const trumpSet = () => {
+    const mark = ['♠', '♥', '♦', '♣']
+    for (let i = 1; i < 14; i++) {
+      for (let m = 0; m < 4; m++) {
+        trumpRef.add({
+          mark: mark[m],
+          number: i
         })
-      ])
-      .flat()
+      }
+    }
+  }
 
-    deckRef.update({ cards: cards })
+  // トランプを削除する
+  const trumpDelete = () => {
+    trumpRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        trumpRef
+          .doc(doc.id)
+          .delete()
+          .then(() => {
+            console.log('できた')
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      })
+    })
+  }
 
-    // deckを監視してカードに変化があれば受信する
-    deckRef.onSnapshot((doc) => {
-      const deck = doc.data() as Deck | undefined
-      if (deck) {
-        setDeck(deck)
+  // トランプの監視
+  const observe = () => {
+    trumpRef.onSnapshot((snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data()) as any | undefined
+      if (data) {
+        setDeck(data)
       }
     })
-  }, [])
+  }
+
+  console.log(deck)
 
   return (
-    <div className="CardGame">
-      <h2>Deck</h2>
-      <div className="Deck">
-        {
-          // すべてのカードの内容を表示する
-          deck.cards.map((card) => {
-            return <span style={{ color: card.color }}>{card.name}</span>
-          })
-        }
-      </div>
+    <div>
+      <button onClick={() => trumpSet()}>トランプ</button>
+      <button onClick={() => trumpDelete()}>削除</button>
+      <button onClick={() => observe()}>監視</button>
+      {
+        // すべてのカードの内容を表示する
+        deck.map((card) => {
+          return (
+            <span>
+              {card.mark}
+              {card.number}
+            </span>
+          )
+        })
+      }
     </div>
   )
 }
