@@ -4,6 +4,7 @@ import { db } from '../config/firebase'
 type Card = {
   mark: string
   number: number
+  used: boolean
 }
 
 const CardDeck = () => {
@@ -17,7 +18,8 @@ const CardDeck = () => {
       for (let m = 0; m < 4; m++) {
         trumpRef.add({
           mark: mark[m],
-          number: i
+          number: i,
+          used: false
         })
       }
     }
@@ -50,24 +52,22 @@ const CardDeck = () => {
     })
   }
 
-  console.log(deck)
+  // console.log(deck)
 
   return (
     <div>
       <button onClick={() => trumpSet()}>トランプ</button>
       <button onClick={() => trumpDelete()}>削除</button>
       <button onClick={() => observe()}>監視</button>
-      {
-        // すべてのカードの内容を表示する
-        deck.map((card) => {
-          return (
-            <span>
-              {card.mark}
-              {card.number}
-            </span>
-          )
-        })
-      }
+      <h2>すべてのカード</h2>
+      {deck.map((card) => {
+        return (
+          <span>
+            {card.mark}
+            {card.number}
+          </span>
+        )
+      })}
     </div>
   )
 }
