@@ -1,16 +1,26 @@
-import React from 'react'
-import CardDeck from './components/CardDeck'
-import CardDraw from './components/CardDraw'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Top, StandBy, Game } from './Pages'
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-        <h2>Cards</h2>
-      </div>
-      <CardDeck />
-      <CardDraw />
-    </div>
+    <Router>
+      <ul>
+        <li>
+          <Link to="/">TOP</Link>
+        </li>
+        <li>
+          <Link to="/StandBy">StandBy</Link>
+        </li>
+        <li>
+          <Link to="/Game">Game</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={Top} />
+        <Route exact path="/StandBy" component={StandBy} />
+        <Route exact path="/Game" component={Game} />
+      </Switch>
+    </Router>
   )
 }
 
