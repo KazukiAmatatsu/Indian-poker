@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { db } from '../config/firebase'
 
-// type Card = {
-//   mark: string
-//   number: number
-//   used: boolean
-// }
+type Card = {
+  mark: string
+  number: number
+  used: boolean
+}
 
 const CardDraw = () => {
   const trumpRef = db.collection('trump')
   const drawRef = trumpRef.where('used', '==', false).limit(1)
   const [id, setId] = useState<string>()
-  const [card, setCard] = useState<any>()
+  const [card, setCard] = useState<Card | any>()
 
   const draw = async () => {
     drawRef
@@ -25,9 +25,6 @@ const CardDraw = () => {
       .catch((error) => {
         console.log(error)
       })
-  }
-
-  const cardUsed = () => {
     trumpRef
       .doc(id)
       .update({
@@ -41,13 +38,12 @@ const CardDraw = () => {
       })
   }
 
-  console.log(id)
+  // console.log(id)
   console.log(card)
 
   return (
     <div>
       <button onClick={() => draw()}>ドロー</button>
-      <button onClick={() => cardUsed()}>使用した</button>
       <span>
         {card?.mark}
         {card?.number}
