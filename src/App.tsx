@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import { Top, StandBy, Game } from './Pages'
+import { Top, HostStandby, GuestStandby, Room, Game } from './Pages'
 
 function App() {
   return (
@@ -9,7 +9,13 @@ function App() {
           <Link to="/">TOP</Link>
         </li>
         <li>
-          <Link to="/StandBy">StandBy</Link>
+          <Link to="/HostStandby">hostStandby</Link>
+        </li>
+        <li>
+          <Link to="/GuestStandby">GuestStandby</Link>
+        </li>
+        <li>
+          <Link to="/Room">Room</Link>
         </li>
         <li>
           <Link to="/Game">Game</Link>
@@ -17,7 +23,9 @@ function App() {
       </ul>
       <Switch>
         <Route exact path="/" component={Top} />
-        <Route exact path="/StandBy" component={StandBy} />
+        <Route exact path="/HostStandby" component={HostStandby} />
+        <Route exact path="/GuestStandby" component={GuestStandby} />
+        <Route exact path="/StandBy" component={Room} />
         <Route exact path="/Game" component={Game} />
       </Switch>
     </Router>
