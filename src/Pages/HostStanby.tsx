@@ -1,6 +1,10 @@
-import { db } from '../config/firebase'
-import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { CreateRoom } from '../components/SetRoom'
+
+type data = {
+  name: string
+}
 
 const HostStandby = () => {
   const history = useHistory()
@@ -11,40 +15,8 @@ const HostStandby = () => {
     formState: { errors }
   } = useForm<{ name: string }>()
 
-  const randomID = () => {
-    let result = ''
-    for (var i = 0; i < 6; i++) {
-      result += Math.floor(Math.random() * 10)
-    }
-    return result
-  }
-
-  const userID = () => {
-    let result = ''
-    var c = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < 6; i++) {
-      result += c[Math.floor(Math.random() * c.length)]
-    }
-    return result
-  }
-
-  const createRoom = handleSubmit((data) => {
-    const roomID = db.collection('room').doc().id
-    db.collection('room')
-      .doc(roomID)
-      .set({
-        roomID,
-        inviteCode: randomID(),
-        member: {
-          [`${userID()}`]: {
-            name: data.name,
-            hand: '',
-            isHost: true,
-            isReady: true
-          }
-        },
-        isGaming: false
-      })
+  const createRoom = handleSubmit((data: data) => {
+    CreateRoom(data)
     history.push('/Room')
     reset()
   })
