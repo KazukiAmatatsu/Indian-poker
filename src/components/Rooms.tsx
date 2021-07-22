@@ -3,10 +3,10 @@ import { nanoid } from 'nanoid'
 import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
 
-export const CreateRoom = (data: { name: string }) => {
-  const userID = nanoid(6)
-  const inviteCode = customAlphabet(numbers, 6)
+const userID = nanoid(6)
 
+export const CreateRoom = (data: { name: string }) => {
+  const inviteCode = customAlphabet(numbers, 6)
   const roomID = db.collection('room').doc().id
   db.collection('room')
     .doc(roomID)
@@ -23,32 +23,32 @@ export const CreateRoom = (data: { name: string }) => {
       },
       isGaming: false
     })
+  console.log(roomID)
+}
+
+export const getRoomID = async (code: string) => {
+  let roomID: string = ''
+  await db
+    .collection('room')
+    .where('inviteCode', '==', code)
+    .where('isGaming', '==', false)
+    .limit(1)
+    .get()
+    .then((docs) =>
+      docs.forEach((doc) => {
+        roomID = doc.id
+      })
+    )
+    .catch((error) => {
+      console.log(error)
+    })
+  return roomID
 }
 
 export const JoinRoom = async (data: { name: string; code: string }) => {
-  const userID = nanoid(6)
-  const getRoomID = async (code: string) => {
-    let roomID: string = ''
-    await db
-      .collection('room')
-      .where('inviteCode', '==', code)
-      .where('isGaming', '==', false)
-      .limit(1)
-      .get()
-      .then((docs) =>
-        docs.forEach((doc) => {
-          roomID = doc.id
-        })
-      )
-      .catch((error) => {
-        console.log(error)
-      })
-    return roomID
-  }
-
   const inviteCode = data.code
+  const roomID = await getRoomID(inviteCode)
   if (inviteCode.length === 6) {
-    const roomID = await getRoomID(inviteCode)
     if (roomID) {
       db.collection('room')
         .doc(roomID)

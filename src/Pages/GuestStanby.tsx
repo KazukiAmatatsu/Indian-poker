@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
-import { JoinRoom } from '../components/SetRoom'
+import { JoinRoom } from '../components/Rooms'
 
 const GuestStandby = () => {
   const history = useHistory()

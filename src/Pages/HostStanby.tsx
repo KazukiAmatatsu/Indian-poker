@@ -1,10 +1,6 @@
-import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { CreateRoom } from '../components/SetRoom'
-
-type data = {
-  name: string
-}
+import { useHistory } from 'react-router-dom'
+import { CreateRoom } from '../components/Rooms'
 
 const HostStandby = () => {
   const history = useHistory()
@@ -15,10 +11,10 @@ const HostStandby = () => {
     formState: { errors }
   } = useForm<{ name: string }>()
 
-  const createRoom = handleSubmit((data: data) => {
+  const createRoom = handleSubmit((data: { name: string }) => {
     CreateRoom(data)
-    history.push('/Room')
     reset()
+    // history.push('/Room')
   })
 
   return (

@@ -25,7 +25,7 @@ function App() {
         <Route exact path="/" component={Top} />
         <Route exact path="/HostStandby" component={HostStandby} />
         <Route exact path="/GuestStandby" component={GuestStandby} />
-        <Route exact path="/StandBy" component={Room} />
+        <Route exact path="/Room" component={Room} />
         <Route exact path="/Game" component={Game} />
       </Switch>
     </Router>
