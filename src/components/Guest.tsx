@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { db } from '../config/firebase'
 import { useForm } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
+import { nanoid } from 'nanoid'
+import { Link } from 'react-router-dom'
 
-const GuestStandby = () => {
-  const history = useHistory()
+const Guest = () => {
+  const [roomID, setRoomID] = useState<String>()
   const {
     register,
     handleSubmit,
@@ -11,14 +13,7 @@ const GuestStandby = () => {
     formState: { errors }
   } = useForm<{ name: string; code: string }>()
 
-  const userID = () => {
-    let result = ''
-    var c = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < 6; i++) {
-      result += c[Math.floor(Math.random() * c.length)]
-    }
-    return result
-  }
+  const userID = nanoid(6)
 
   const getRoomID = async (code: string) => {
     let roomID: string = ''
@@ -39,30 +34,32 @@ const GuestStandby = () => {
     return roomID
   }
 
-  const joinRoom = handleSubmit(async (data) => {
-    const inviteCode = data.code
-    if (inviteCode.length === 6) {
+  const joinRoom = handleSubmit(
+    async (data: { name: string; code: string }) => {
+      const inviteCode = data.code
       const roomID = await getRoomID(inviteCode)
-      if (roomID) {
-        db.collection('room')
-          .doc(roomID)
-          .update({
-            [`member.${userID()}`]: {
-              name: data.name,
-              hand: '',
-              isHost: false,
-              isReady: false
-            }
-          })
-        history.push('/Room')
+      if (inviteCode.length === 6) {
+        if (roomID) {
+          db.collection('room')
+            .doc(roomID)
+            .update({
+              [`member.${userID}`]: {
+                name: data.name,
+                hand: '',
+                isHost: false,
+                isReady: false
+              }
+            })
+        } else {
+          alert('その部屋は存在しないかプレイ中です。')
+        }
       } else {
-        alert('その部屋は存在しないかプレイ中です。')
+        alert('6桁の招待コードを入力してください')
       }
       reset()
-    } else {
-      alert('6桁の招待コードを入力してください')
+      setRoomID(roomID)
     }
-  })
+  )
 
   return (
     <>
@@ -84,9 +81,10 @@ const GuestStandby = () => {
           <span style={{ color: 'red' }}>招待コードを入力してください</span>
         )}
       </form>
-      <button onClick={joinRoom}>ルームに参加する</button>
+      <button onClick={joinRoom}>ルームを探す</button>
+      {roomID ? <Link to={`/Room/${roomID}`}>ルームに移動</Link> : <></>}
     </>
   )
 }
 
-export default GuestStandby
+export default Guest
