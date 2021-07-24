@@ -1,19 +1,36 @@
 import { VFC } from 'react'
+import { db } from '../config/firebase'
 import { RouteComponentProps } from 'react-router-dom'
-// import { db } from '../config/firebase'
+import { room } from '../recoil/atom'
+import { useRecoilState } from 'recoil'
+import { Member } from '../components/Member'
+import { FireStoreToRecoil } from '../recoil/FireStoreToRecoil'
 
 type UserProps = RouteComponentProps<{
   id: string
 }>
 
 const Room: VFC<UserProps> = (props) => {
-  const id = props.match.params.id
-  console.log(id)
-  // const inviteCode =()=> {
-  //   db.collection('room').doc()
-  // }
+  const [roomInfo, setRoomInfo] = useRecoilState(room)
+  const roomId = props.match.params.id
+  FireStoreToRecoil(roomId)
 
-  return <h2>id：{id}</h2>
+  const gameStart = () => {
+    db.collection('room').doc(roomId).update({
+      isGaming: true
+    })
+  }
+
+  return (
+    <>
+      <h2>id：{roomInfo.inviteCode}</h2>
+      <h2>メンバー</h2>
+      <ul>
+        <Member />
+      </ul>
+      <button onClick={gameStart}>ゲームスタート</button>
+    </>
+  )
 }
 
 export default Room

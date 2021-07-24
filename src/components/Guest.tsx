@@ -3,6 +3,7 @@ import { user, room } from '../recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { GetRoomID } from '../components/GetRoomID'
 
 const Guest = () => {
   const userInfo = useRecoilValue(user)
@@ -14,34 +15,13 @@ const Guest = () => {
     formState: { errors }
   } = useForm<{ code: string }>()
 
-  const getRoomID = async (code: string) => {
-    if (code.length === 6) {
-      let roomID: string = ''
-      await db
-        .collection('room')
-        .where('inviteCode', '==', code)
-        .where('isGaming', '==', false)
-        .limit(1)
-        .get()
-        .then((docs) =>
-          docs.forEach((doc) => {
-            roomID = doc.id
-          })
-        )
-        .catch((error) => {
-          console.log(error)
-        })
-      return roomID
-    }
-  }
-
   const joinRoom = handleSubmit(async (data: { code: string }) => {
     const inviteCode = data.code
     if (inviteCode.length === 6) {
-      const roomID = await getRoomID(inviteCode)
-      if (roomID) {
+      const roomId = await GetRoomID(inviteCode)
+      if (roomId) {
         db.collection('room')
-          .doc(roomID)
+          .doc(roomId)
           .update({
             [`member.${userInfo.id}`]: {
               name: userInfo.name,
@@ -51,7 +31,8 @@ const Guest = () => {
             }
           })
         setRoomInfo({
-          roomId: roomID,
+          ...roomInfo,
+          roomId: roomId,
           inviteCode: inviteCode
         })
       } else {
@@ -76,8 +57,8 @@ const Guest = () => {
         )}
       </form>
       <button onClick={joinRoom}>ルームを探す</button>
-      {roomInfo.inviteCode ? (
-        <Link to={`/Room/${roomInfo.inviteCode}`}>ルームに移動</Link>
+      {roomInfo.roomId ? (
+        <Link to={`/Room/${roomInfo.roomId}`}>ルームに移動</Link>
       ) : (
         <></>
       )}

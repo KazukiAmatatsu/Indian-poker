@@ -13,14 +13,14 @@ export const StartButton = () => {
     formState: { errors }
   } = useForm<{ name: string }>()
 
-  const userID = nanoid(6)
+  const userId = nanoid(6)
   const history = useHistory()
 
   const [isOpen, setIsOpen] = useState(true)
   const [userInfo, setUserInfo] = useRecoilState(user)
 
   const setUser = handleSubmit((data: { name: string }) => {
-    setUserInfo({ ...userInfo, name: data.name, id: userID })
+    setUserInfo({ ...userInfo, name: data.name, id: userId })
     history.push('/Standby')
     reset()
     setIsOpen(false)

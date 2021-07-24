@@ -26,16 +26,16 @@ export type Member = {
 export type Room = {
   readonly roomId: string
   readonly inviteCode: string
-  // member: Member | null
-  // isGaming: boolean
+  member: Member | undefined
+  isGaming: boolean
 }
 
 export const room = atom<Room>({
   key: 'room_state',
   default: {
     roomId: '',
-    inviteCode: ''
-    // member: {},
-    // isGaming: false
+    inviteCode: '',
+    member: {},
+    isGaming: false
   }
 })
