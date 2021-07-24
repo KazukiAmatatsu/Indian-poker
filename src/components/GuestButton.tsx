@@ -3,9 +3,9 @@ import { user, room } from '../recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { GetRoomID } from '../components/GetRoomID'
+import { GetRoomID } from './GetRoomID'
 
-const Guest = () => {
+const GuestButton = () => {
   const userInfo = useRecoilValue(user)
   const [roomInfo, setRoomInfo] = useRecoilState(room)
   const {
@@ -66,4 +66,4 @@ const Guest = () => {
   )
 }
 
-export default Guest
+export default GuestButton
