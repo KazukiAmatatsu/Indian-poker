@@ -1,77 +1,52 @@
-import { useState } from 'react'
 import { db } from '../config/firebase'
+import { user, room } from '../recoil/atom'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
-import { nanoid } from 'nanoid'
 import { Link } from 'react-router-dom'
+import { GetRoomID } from '../components/GetRoomID'
 
 const Guest = () => {
-  const [roomID, setRoomID] = useState<String>()
+  const userInfo = useRecoilValue(user)
+  const [roomInfo, setRoomInfo] = useRecoilState(room)
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<{ name: string; code: string }>()
+  } = useForm<{ code: string }>()
 
-  const userID = nanoid(6)
-
-  const getRoomID = async (code: string) => {
-    let roomID: string = ''
-    await db
-      .collection('room')
-      .where('inviteCode', '==', code)
-      .where('isGaming', '==', false)
-      .limit(1)
-      .get()
-      .then((docs) =>
-        docs.forEach((doc) => {
-          roomID = doc.id
+  const joinRoom = handleSubmit(async (data: { code: string }) => {
+    const inviteCode = data.code
+    if (inviteCode.length === 6) {
+      const roomId = await GetRoomID(inviteCode)
+      if (roomId) {
+        db.collection('room')
+          .doc(roomId)
+          .update({
+            [`member.${userInfo.id}`]: {
+              name: userInfo.name,
+              hand: '',
+              isHost: false,
+              isReady: false
+            }
+          })
+        setRoomInfo({
+          ...roomInfo,
+          roomId: roomId,
+          inviteCode: inviteCode
         })
-      )
-      .catch((error) => {
-        console.log(error)
-      })
-    return roomID
-  }
-
-  const joinRoom = handleSubmit(
-    async (data: { name: string; code: string }) => {
-      const inviteCode = data.code
-      const roomID = await getRoomID(inviteCode)
-      if (inviteCode.length === 6) {
-        if (roomID) {
-          db.collection('room')
-            .doc(roomID)
-            .update({
-              [`member.${userID}`]: {
-                name: data.name,
-                hand: '',
-                isHost: false,
-                isReady: false
-              }
-            })
-        } else {
-          alert('その部屋は存在しないかプレイ中です。')
-        }
       } else {
-        alert('6桁の招待コードを入力してください')
+        alert('その部屋は存在しないかプレイ中です。')
       }
-      reset()
-      setRoomID(roomID)
+    } else {
+      alert('6桁の招待コードを入力してください')
     }
-  )
+    reset()
+  })
 
   return (
     <>
       <form onSubmit={joinRoom}>
-        <input
-          type="name"
-          placeholder="プレイヤー名"
-          {...register('name', { required: true })}
-        />
-        {errors.name && (
-          <span style={{ color: 'red' }}>プレイヤー名を入力してください</span>
-        )}
         <input
           type="code"
           placeholder="招待コード"
@@ -82,7 +57,11 @@ const Guest = () => {
         )}
       </form>
       <button onClick={joinRoom}>ルームを探す</button>
-      {roomID ? <Link to={`/Room/${roomID}`}>ルームに移動</Link> : <></>}
+      {roomInfo.roomId ? (
+        <Link to={`/Room/${roomInfo.roomId}`}>ルームに移動</Link>
+      ) : (
+        <></>
+      )}
     </>
   )
 }

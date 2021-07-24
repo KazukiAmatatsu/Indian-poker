@@ -26,7 +26,7 @@ export type Member = {
 export type Room = {
   readonly roomId: string
   readonly inviteCode: string
-  member: Member | null
+  member: Member | undefined
   isGaming: boolean
 }
 
