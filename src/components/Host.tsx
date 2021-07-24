@@ -1,26 +1,26 @@
-import { useState } from 'react'
 import { db } from '../config/firebase'
 import { user, room } from '../recoil/atom'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
 import { Link } from 'react-router-dom'
 
 const Host = () => {
-  const [userInfo, setUserInfo] = useRecoilState(user)
+  // const [userInfo, setUserInfo] = useRecoilState(user)
+  const userInfo = useRecoilValue(user)
   const [roomInfo, setRoomInfo] = useRecoilState(room)
-  const inviteCode = customAlphabet(numbers, 6)
+  const code = customAlphabet(numbers, 6)
 
   const createRoom = async () => {
     const roomID = db.collection('room').doc().id
-    const code = inviteCode()
+    const inviteCode = code()
     console.log(code)
     await db
       .collection('room')
       .doc(roomID)
       .set({
         roomID,
-        inviteCode: code,
+        inviteCode: inviteCode,
         member: {
           [`${userInfo.id}`]: {
             name: userInfo.name,
@@ -33,16 +33,7 @@ const Host = () => {
       })
     setRoomInfo({
       roomId: roomID,
-      inviteCode: code,
-      member: {
-        [`${userInfo.id}`]: {
-          name: userInfo.name,
-          hand: '',
-          isHost: true,
-          isReady: true
-        }
-      },
-      isGaming: false
+      inviteCode: inviteCode
     })
     console.log(code)
   }
