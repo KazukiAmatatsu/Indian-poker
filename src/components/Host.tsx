@@ -14,7 +14,6 @@ const Host = () => {
   const createRoom = async () => {
     const roomID = db.collection('room').doc().id
     const inviteCode = code()
-    console.log(code)
     await db
       .collection('room')
       .doc(roomID)
@@ -35,7 +34,6 @@ const Host = () => {
       roomId: roomID,
       inviteCode: inviteCode
     })
-    console.log(code)
   }
 
   return (
