@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { user } from '../recoil/atom'
+import { user } from 'recoil/atom'
 import { useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { nanoid } from 'nanoid'

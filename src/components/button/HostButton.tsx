@@ -1,10 +1,10 @@
-import { db } from '../config/firebase'
-import { user, room } from '../recoil/atom'
+import { db } from 'config/firebase'
+import { user, room } from 'recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
 import { useHistory } from 'react-router-dom'
-import { SetTrump } from './SetTrump'
+import { SetTrump } from 'components/SetTrump'
 
 const HostButton = () => {
   const userInfo = useRecoilValue(user)

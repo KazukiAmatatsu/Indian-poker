@@ -1,4 +1,4 @@
-import { StartButton } from '../components/StartButton'
+import { StartButton } from 'components/button/StartButton'
 
 const Top = () => {
   return (

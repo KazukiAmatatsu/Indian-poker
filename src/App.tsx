@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import { Top, Standby, Room, Game } from './Pages'
+import { Top, Standby, Room, Game } from 'Pages'
 
 import { RecoilRoot } from 'recoil'
 
@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/" component={Top} />
           <Route exact path="/Standby" component={Standby} />
           <Route exact path="/Room/:id" component={Room} />
-          <Route exact path="/Game" component={Game} />
+          <Route exact path="/Game/:id" component={Game} />
         </Switch>
       </Router>
     </RecoilRoot>

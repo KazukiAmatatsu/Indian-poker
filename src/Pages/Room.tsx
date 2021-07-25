@@ -1,25 +1,19 @@
 import { VFC } from 'react'
-import { db } from '../config/firebase'
 import { RouteComponentProps } from 'react-router-dom'
-import { room } from '../recoil/atom'
-import { useRecoilState } from 'recoil'
-import { Member } from '../components/Member'
-import { FireStoreToRecoil } from '../recoil/FireStoreToRecoil'
+import { room } from 'recoil/atom'
+import { useRecoilValue } from 'recoil'
+import { FireStoreToRecoil } from 'recoil/FireStoreToRecoil'
+import { Member } from 'components/display/Member'
+import GameStartButton from 'components/button/GameStartButton'
 
 type UserProps = RouteComponentProps<{
   id: string
 }>
 
 const Room: VFC<UserProps> = (props) => {
-  const [roomInfo, setRoomInfo] = useRecoilState(room)
+  const roomInfo = useRecoilValue(room)
   const roomId = props.match.params.id
   FireStoreToRecoil(roomId)
-
-  const gameStart = () => {
-    db.collection('room').doc(roomId).update({
-      isGaming: true
-    })
-  }
 
   return (
     <>
@@ -28,7 +22,7 @@ const Room: VFC<UserProps> = (props) => {
       <ul>
         <Member />
       </ul>
-      <button onClick={gameStart}>ゲームスタート</button>
+      <GameStartButton />
     </>
   )
 }

@@ -1,9 +1,9 @@
-import { db } from '../config/firebase'
-import { user, room } from '../recoil/atom'
+import { db } from 'config/firebase'
+import { user, room } from 'recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
-import { GetRoomID } from './GetRoomID'
+import { GetRoomID } from 'components/GetRoomID'
 
 const GuestButton = () => {
   const userInfo = useRecoilValue(user)
