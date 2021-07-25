@@ -4,6 +4,7 @@ export type User = {
   id: string
   name: string
 }
+
 export const user = atom<User>({
   key: 'user_state',
   default: {
@@ -18,6 +19,7 @@ export type Member = {
     isHost: boolean
     isReady: boolean
     hand: string
+    enter: boolean
   }
 }
 

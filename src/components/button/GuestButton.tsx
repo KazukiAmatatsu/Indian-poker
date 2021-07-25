@@ -28,7 +28,8 @@ const GuestButton = () => {
               name: userInfo.name,
               hand: '',
               isHost: false,
-              isReady: false
+              isReady: false,
+              enter: false
             }
           })
         setRoomInfo({

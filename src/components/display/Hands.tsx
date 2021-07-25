@@ -9,19 +9,12 @@ const Hands = () => {
   return (
     <>
       {member &&
-        Object.entries(member).map(([id, data]) => {
-          if (id === userInfo.id) {
-            return (
-              <>
-                <div style={{ display: 'none' }}>{data.hand}</div>
-                <h3>{data.name}</h3>
-              </>
-            )
-          } else {
+        Object.entries(member).map(([key, data]) => {
+          if (key !== userInfo.id) {
             return (
               <>
                 <div>{data.hand}</div>
-                <h3>{data.name}</h3>
+                <p>{data.name}</p>
               </>
             )
           }

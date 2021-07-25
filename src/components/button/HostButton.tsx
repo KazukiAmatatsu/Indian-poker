@@ -26,7 +26,8 @@ const HostButton = () => {
             name: userInfo.name,
             hand: '',
             isHost: true,
-            isReady: true
+            isReady: true,
+            enter: false
           }
         },
         isGaming: false
