@@ -2,7 +2,7 @@ import { VFC } from 'react'
 import { db } from '../config/firebase'
 import { RouteComponentProps } from 'react-router-dom'
 import { room } from '../recoil/atom'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { Member } from '../components/Member'
 import { FireStoreToRecoil } from '../recoil/FireStoreToRecoil'
 
@@ -11,7 +11,7 @@ type UserProps = RouteComponentProps<{
 }>
 
 const Room: VFC<UserProps> = (props) => {
-  const [roomInfo, setRoomInfo] = useRecoilState(room)
+  const roomInfo = useRecoilValue(room)
   const roomId = props.match.params.id
   FireStoreToRecoil(roomId)
 
