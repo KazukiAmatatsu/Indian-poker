@@ -4,8 +4,9 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
 import { Link } from 'react-router-dom'
+import { SetTrump } from './SetTrump'
 
-const Host = () => {
+const HostButton = () => {
   // const [userInfo, setUserInfo] = useRecoilState(user)
   const userInfo = useRecoilValue(user)
   const [roomInfo, setRoomInfo] = useRecoilState(room)
@@ -30,6 +31,7 @@ const Host = () => {
         },
         isGaming: false
       })
+    SetTrump(roomId)
     setRoomInfo({
       ...roomInfo,
       roomId: roomId,
@@ -50,4 +52,4 @@ const Host = () => {
   )
 }
 
-export default Host
+export default HostButton
