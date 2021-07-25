@@ -3,13 +3,14 @@ import { user, room } from '../recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { SetTrump } from './SetTrump'
 
-const Host = () => {
-  // const [userInfo, setUserInfo] = useRecoilState(user)
+const HostButton = () => {
   const userInfo = useRecoilValue(user)
   const [roomInfo, setRoomInfo] = useRecoilState(room)
   const code = customAlphabet(numbers, 6)
+  const history = useHistory()
 
   const createRoom = async () => {
     const roomId = db.collection('room').doc().id
@@ -30,24 +31,20 @@ const Host = () => {
         },
         isGaming: false
       })
+    SetTrump(roomId)
     setRoomInfo({
       ...roomInfo,
       roomId: roomId,
       inviteCode: inviteCode
     })
+    history.push(`/Room/${roomId}`)
   }
 
   return (
     <>
-      <button onClick={createRoom}>招待コードを発行する</button>
-      <h3>招待コード：{roomInfo.inviteCode}</h3>
-      {roomInfo.roomId ? (
-        <Link to={`/Room/${roomInfo.roomId}`}>ルームに移動</Link>
-      ) : (
-        <></>
-      )}
+      <button onClick={createRoom}>部屋をつくる</button>
     </>
   )
 }
 
-export default Host
+export default HostButton

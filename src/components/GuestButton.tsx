@@ -2,8 +2,8 @@ import { db } from '../config/firebase'
 import { user, room } from '../recoil/atom'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
-import { GetRoomID } from '../components/GetRoomID'
+import { useHistory } from 'react-router-dom'
+import { GetRoomID } from './GetRoomID'
 
 const Guest = () => {
   const userInfo = useRecoilValue(user)
@@ -14,6 +14,7 @@ const Guest = () => {
     reset,
     formState: { errors }
   } = useForm<{ code: string }>()
+  const history = useHistory()
 
   const joinRoom = handleSubmit(async (data: { code: string }) => {
     const inviteCode = data.code
@@ -35,6 +36,7 @@ const Guest = () => {
           roomId: roomId,
           inviteCode: inviteCode
         })
+        history.push(`/Room/${roomId}`)
       } else {
         alert('その部屋は存在しないかプレイ中です。')
       }
@@ -56,12 +58,7 @@ const Guest = () => {
           <span style={{ color: 'red' }}>招待コードを入力してください</span>
         )}
       </form>
-      <button onClick={joinRoom}>ルームを探す</button>
-      {roomInfo.roomId ? (
-        <Link to={`/Room/${roomInfo.roomId}`}>ルームに移動</Link>
-      ) : (
-        <></>
-      )}
+      <button onClick={joinRoom}>部屋に入る</button>
     </>
   )
 }
