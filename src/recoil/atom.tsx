@@ -3,14 +3,12 @@ import { atom } from 'recoil'
 export type User = {
   id: string
   name: string
-  hand: string
 }
 export const user = atom<User>({
   key: 'user_state',
   default: {
     id: '',
-    name: '',
-    hand: ''
+    name: ''
   }
 })
 

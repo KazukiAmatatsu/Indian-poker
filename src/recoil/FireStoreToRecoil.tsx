@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { db } from '../config/firebase'
+import { db } from 'config/firebase'
 import { room, Room } from './atom'
 import { useSetRecoilState } from 'recoil'
 

@@ -1,4 +1,4 @@
-import { room } from '../recoil/atom'
+import { room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 
 export const Member = () => {

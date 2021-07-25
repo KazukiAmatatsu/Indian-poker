@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { user } from '../recoil/atom'
+import { user } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
-import HostButton from '../components/HostButton'
-import GuestButton from '../components/GuestButton'
+import HostButton from 'components/button/HostButton'
+import GuestButton from 'components/button/GuestButton'
 
 const Standby = () => {
   const [isOpen, setIsOpen] = useState(false)

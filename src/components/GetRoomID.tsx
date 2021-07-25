@@ -1,4 +1,4 @@
-import { db } from '../config/firebase'
+import { db } from 'config/firebase'
 
 export const GetRoomID = async (code: string) => {
   if (code.length === 6) {

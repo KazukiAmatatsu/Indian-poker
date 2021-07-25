@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { db } from '../config/firebase'
+import { db } from 'config/firebase'
 
 type Card = {
   mark: string
