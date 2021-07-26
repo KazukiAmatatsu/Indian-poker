@@ -17,6 +17,8 @@ const Hands = () => {
                 <p>{data.name}</p>
               </>
             )
+          } else {
+            return <></>
           }
         })}
     </>
