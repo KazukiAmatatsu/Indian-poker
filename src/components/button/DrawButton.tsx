@@ -14,7 +14,9 @@ export const DrawButton = async (userId: string, roomId: string) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        return (id = doc.id), (card = doc.data().card)
+        return (
+          (id = doc.id), (card = doc.data().card)
+        ) /*eslint no-sequences: "error"*/
       })
     })
     .catch((e) => {
