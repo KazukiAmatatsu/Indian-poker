@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { db } from 'config/firebase'
 import { useHistory } from 'react-router-dom'
 import { user, room } from 'recoil/atom'
@@ -9,7 +10,26 @@ const GameStartButton = () => {
   const userInfo = useRecoilValue(user)
   const userId = userInfo.id
   const roomId = roomInfo.roomId
-  const history = useHistory()
+  const member = roomInfo.member
+
+  const [ready, setReady] = useState(false)
+
+  const isHost = roomInfo.member?.[userInfo.id]?.isHost
+
+  const allReady =
+    member &&
+    Object.values(member).length ===
+      Object.values(member).filter((id) => id?.isReady).length
+
+  const readyButton = () => {
+    db.collection('room')
+      .doc(roomId)
+      .update({
+        [`member.${userId}.isReady`]: true
+      })
+    DrawButton(userId, roomId)
+    setReady(true)
+  }
 
   const GameStart = async () => {
     const roomRef = db.collection('room').doc(roomId)
@@ -17,9 +37,22 @@ const GameStartButton = () => {
     await roomRef.update({
       isGaming: true
     })
-    history.push(`/Game/${roomId}`)
   }
-  return <button onClick={() => GameStart()}>ゲームスタート</button>
+
+  return (
+    <>
+      {!isHost && !roomInfo.isGaming && (
+        <button onClick={() => readyButton()} disabled={ready}>
+          {ready ? 'OK!!' : 'Ready?'}
+        </button>
+      )}
+      {isHost && !roomInfo.isGaming && (
+        <button onClick={() => GameStart()} disabled={!allReady}>
+          ゲームスタート
+        </button>
+      )}
+    </>
+  )
 }
 
 export default GameStartButton
