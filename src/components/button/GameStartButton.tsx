@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { db } from 'config/firebase'
-import { useHistory } from 'react-router-dom'
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { DrawButton } from 'components/button/DrawButton'
