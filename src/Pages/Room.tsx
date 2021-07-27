@@ -1,6 +1,7 @@
 import { room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { FireStoreToRecoil } from 'recoil/FireStoreToRecoil'
+import InviteCode from 'components/display/InviteCode'
 import { Member } from 'components/display/Member'
 import GameStartButton from 'components/button/GameStartButton'
 import Game from 'components/display/Game'
@@ -14,7 +15,7 @@ const Room = () => {
         <Game />
       ) : (
         <>
-          <h2>id：{roomInfo.inviteCode}</h2>
+          <InviteCode />
           <Member />
           <GameStartButton />
         </>
