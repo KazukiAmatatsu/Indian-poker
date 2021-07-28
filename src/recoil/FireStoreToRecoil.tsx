@@ -55,7 +55,8 @@ export const FireStoreToRecoil: FC = ({ children }) => {
               enter: false
             }
           },
-          isGaming: false
+          isGaming: false,
+          finished: false
         })
       }
     }

@@ -28,6 +28,7 @@ export type Room = {
   readonly inviteCode: string
   member: Member | undefined
   isGaming: boolean
+  finished: boolean
 }
 
 export const room = atom<Room>({
@@ -36,6 +37,7 @@ export const room = atom<Room>({
     roomId: '',
     inviteCode: '',
     member: {},
-    isGaming: false
+    isGaming: false,
+    finished: false
   }
 })

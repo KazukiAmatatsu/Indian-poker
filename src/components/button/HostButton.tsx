@@ -30,7 +30,8 @@ const HostButton = () => {
             enter: false
           }
         },
-        isGaming: false
+        isGaming: false,
+        finished: false
       })
     SetTrump(roomId)
     setRoomInfo({

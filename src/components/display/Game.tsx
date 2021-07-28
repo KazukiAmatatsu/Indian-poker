@@ -1,3 +1,4 @@
+import { db } from 'config/firebase'
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { DrawButton } from 'components/button/DrawButton'
@@ -10,6 +11,20 @@ const Game = () => {
   const roomInfo = useRecoilValue(room)
   const userId = userInfo.id
   const roomId = roomInfo.roomId
+  const member = roomInfo.member
+
+  const gameFinish = () => {
+    db.collection('room').doc(roomInfo.roomId).update({
+      finished: true
+    })
+  }
+
+  const enterCheck =
+    member &&
+    Object.values(member).map((player) => {
+      return player.enter
+    })
+
   return (
     <>
       <>Game</>
@@ -31,6 +46,13 @@ const Game = () => {
             これで決まり
           </button>
         </>
+      )}
+      {enterCheck?.every((val) => {
+        return val
+      }) ? (
+        <button onClick={() => gameFinish()}>結果発表</button>
+      ) : (
+        <></>
       )}
     </>
   )
