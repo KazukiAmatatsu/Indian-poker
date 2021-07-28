@@ -5,6 +5,7 @@ import InviteCode from 'components/display/InviteCode'
 import Member from 'components/display/Member'
 import GameStartButton from 'components/button/GameStartButton'
 import Game from 'components/display/Game'
+import ContinueButton from 'components/button/ContinueButton'
 
 const Room = () => {
   const roomInfo = useRecoilValue(room)
@@ -20,6 +21,7 @@ const Room = () => {
           <GameStartButton />
         </>
       )}
+      {roomInfo.finished ? <ContinueButton /> : <></>}
     </FireStoreToRecoil>
   )
 }
