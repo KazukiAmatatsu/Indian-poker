@@ -18,7 +18,7 @@ export const FireStoreToRecoil: FC = ({ children }) => {
   if (roomInfo) {
     roomId = id
   } else {
-    history.push('/')
+    history.push('/Standby')
   }
   useEffect(() => {
     let unSubscribe: () => void
