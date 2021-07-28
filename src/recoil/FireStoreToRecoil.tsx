@@ -16,9 +16,9 @@ export const FireStoreToRecoil: FC = ({ children }) => {
 
   let roomId: string
   if (roomInfo) {
-    roomId = roomInfo.roomId
+    roomId = id
   } else {
-    history.push('/Standby')
+    history.push('/')
   }
   useEffect(() => {
     let unSubscribe: () => void
@@ -34,13 +34,15 @@ export const FireStoreToRecoil: FC = ({ children }) => {
     }
     return () => {
       if (roomId) {
+        alert('ルームが削除されました')
+        history.push('/')
         unSubscribe()
-        roomRef.delete()
         trumpRef.get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             trumpRef.doc(doc.id).delete()
           })
         })
+        roomRef.delete()
         setRoomInfo({
           roomId: '',
           inviteCode: '',

@@ -1,7 +1,7 @@
 import { room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 
-export const Member = () => {
+const Member = () => {
   const roomInfo = useRecoilValue(room)
   const member = roomInfo.member
   return (
@@ -16,3 +16,4 @@ export const Member = () => {
     </>
   )
 }
+export default Member
