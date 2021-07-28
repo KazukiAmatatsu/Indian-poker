@@ -1,12 +1,25 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Top, Standby, Room } from 'Pages'
 
-import { RecoilRoot } from 'recoil'
+import { RecoilRoot, MutableSnapshot } from 'recoil'
+import { user, room } from 'recoil/atom'
+import { RecoilStatePersist } from 'recoil/RecoilStatePersist'
 import RedirectTop from 'components/RedirectTop'
 
 function App() {
+  const initializeState = (mutableSnapshot: MutableSnapshot) => {
+    const User = localStorage.getItem(user.key)
+    if (User) {
+      mutableSnapshot.set(user, JSON.parse(User).value)
+    }
+    const Room = localStorage.getItem(room.key)
+    if (Room) {
+      mutableSnapshot.set(user, JSON.parse(Room).value)
+    }
+  }
   return (
-    <RecoilRoot>
+    <RecoilRoot initializeState={initializeState}>
+      <RecoilStatePersist />
       <Router>
         <ul>
           <li>
