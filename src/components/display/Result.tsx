@@ -10,11 +10,11 @@ const Result = () => {
   const sorted =
     member &&
     Object.values(member).sort((a, b) => {
-      if (a.number !== b.number) {
-        return b.number - a.number
-      }
       if (a.mark !== b.mark) {
         return markStrong.indexOf(a.mark) - markStrong.indexOf(b.mark)
+      }
+      if (a.number !== b.number) {
+        return b.number - a.number
       }
       return 0
     })
