@@ -5,7 +5,7 @@ const Result = () => {
   const roomInfo = useRecoilValue(room)
   const member = roomInfo.member
 
-  let markStrong = ['♠', '♥', '♦', '♣']
+  let markStrength = ['♠', '♥', '♦', '♣']
 
   const sorted =
     member &&
@@ -14,7 +14,7 @@ const Result = () => {
         return b.number - a.number
       }
       if (a.number === b.number && a.mark !== b.mark) {
-        return markStrong.indexOf(a.mark) - markStrong.indexOf(b.mark)
+        return markStrength.indexOf(a.mark) - markStrength.indexOf(b.mark)
       }
       return 0
     })
