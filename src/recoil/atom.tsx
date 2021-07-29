@@ -18,7 +18,8 @@ export type Member = {
     name: string
     isHost: boolean
     isReady: boolean
-    hand: string
+    mark: string
+    number: number
     enter: boolean
   }
 }

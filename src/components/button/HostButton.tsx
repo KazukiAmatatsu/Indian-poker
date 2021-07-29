@@ -24,7 +24,8 @@ const HostButton = () => {
         member: {
           [userInfo.id]: {
             name: userInfo.name,
-            hand: '',
+            mark: '',
+            number: '',
             isHost: true,
             isReady: true,
             enter: false

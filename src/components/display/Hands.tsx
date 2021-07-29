@@ -13,7 +13,7 @@ const Hands = () => {
           if (key !== userInfo.id) {
             return (
               <>
-                <div>{data.hand}</div>
+                <div>{data.mark + data.number}</div>
                 <p>{data.name}</p>
               </>
             )
