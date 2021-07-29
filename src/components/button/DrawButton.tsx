@@ -7,7 +7,8 @@ export const DrawButton = async (userId: string, roomId: string) => {
   const drawRef = trumpRef.where('used', '==', false).limit(1)
 
   let id = ''
-  let card = ''
+  let mark = ''
+  let number = ''
 
   // カードを1枚引く
   await drawRef
@@ -15,7 +16,7 @@ export const DrawButton = async (userId: string, roomId: string) => {
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         return (
-          (id = doc.id), (card = doc.data().card)
+          (id = doc.id), (mark = doc.data().mark), (number = doc.data().number)
         ) /*eslint no-sequences: "error"*/
       })
     })
@@ -38,6 +39,7 @@ export const DrawButton = async (userId: string, roomId: string) => {
 
   // 引いたカードを手札にする
   roomRef.update({
-    [`member.${userId}.hand`]: card
+    [`member.${userId}.mark`]: mark,
+    [`member.${userId}.number`]: number
   })
 }

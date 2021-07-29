@@ -5,6 +5,8 @@ import { DrawButton } from 'components/button/DrawButton'
 import { EnterButton } from 'components/button/EnterButton'
 import Hands from 'components/display/Hands'
 import MyHand from 'components/display/MyHand'
+import Result from 'components/display/Result'
+import ContinueButton from 'components/button/ContinueButton'
 
 const Game = () => {
   const userInfo = useRecoilValue(user)
@@ -50,7 +52,16 @@ const Game = () => {
       {enterCheck?.every((val) => {
         return val
       }) ? (
-        <button onClick={() => gameFinish()}>結果発表</button>
+        <>
+          {roomInfo.finished ? (
+            <>
+              <Result />
+              <ContinueButton />
+            </>
+          ) : (
+            <button onClick={() => gameFinish()}>結果発表</button>
+          )}
+        </>
       ) : (
         <></>
       )}

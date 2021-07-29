@@ -51,7 +51,8 @@ export const FireStoreToRecoil: FC = ({ children }) => {
               name: userInfo.name,
               isHost: false,
               isReady: false,
-              hand: '',
+              mark: '',
+              number: 0,
               enter: false
             }
           },

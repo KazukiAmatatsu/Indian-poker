@@ -26,7 +26,8 @@ const GuestButton = () => {
           .update({
             [`member.${userInfo.id}`]: {
               name: userInfo.name,
-              hand: '',
+              mark: '',
+              number: '',
               isHost: false,
               isReady: false,
               enter: false
