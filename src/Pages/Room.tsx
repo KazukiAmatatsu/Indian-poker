@@ -13,7 +13,10 @@ const Room = () => {
   return (
     <FireStoreToRecoil>
       {roomInfo?.isGaming ? (
-        <Game />
+        <>
+          <Game />
+          <ContinueButton />
+        </>
       ) : (
         <>
           <InviteCode />
@@ -21,7 +24,6 @@ const Room = () => {
           <GameStartButton />
         </>
       )}
-      <ContinueButton />
     </FireStoreToRecoil>
   )
 }
