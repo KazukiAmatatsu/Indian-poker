@@ -10,6 +10,21 @@ export const DrawButton = async (userId: string, roomId: string) => {
   let mark = ''
   let number = ''
 
+  // もし全部のカードが使用済みだったらシャッフルして未使用にする
+  trumpRef.where('used', '==', true).onSnapshot((querySnapshot) => {
+    const usedCards = querySnapshot.docs.map((doc) => doc.id)
+    if (usedCards.length === 52) {
+      trumpRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          trumpRef.doc(doc.id).update({
+            used: false
+          })
+        })
+      })
+      console.log('デッキを戻したよ')
+    }
+  })
+
   // カードを1枚引く
   await drawRef
     .get()
