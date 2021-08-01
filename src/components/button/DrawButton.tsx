@@ -1,60 +1,36 @@
 import { db } from 'config/firebase'
+import { SetTrump } from 'components/SetTrump'
 
 // userIdとroomIdを引数に渡したらカードを一枚引く関数
 export const DrawButton = async (userId: string, roomId: string) => {
   const roomRef = db.collection('room').doc(roomId)
   const trumpRef = roomRef.collection('trump')
-  const drawRef = trumpRef.where('used', '==', false).limit(1)
+  const drawRef = trumpRef.limit(1)
 
-  let id = ''
-  let mark = ''
-  let number = ''
+  const deck = await trumpRef.get()
+  const deckList = deck.docs.map((doc) => doc.id)
 
-  // もし全部のカードが使用済みだったらシャッフルして未使用にする
-  trumpRef.where('used', '==', true).onSnapshot((querySnapshot) => {
-    const usedCards = querySnapshot.docs.map((doc) => doc.id)
-    if (usedCards.length === 52) {
-      trumpRef.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          trumpRef.doc(doc.id).update({
-            used: false
-          })
-        })
-      })
-      console.log('デッキを戻したよ')
-    }
-  })
+  // もしカードが残り0枚ならもう一度セットトランプする
+  if (deckList.length === 0) {
+    SetTrump(roomId)
+    alert('トランプをリセットしました！')
+  }
 
   // カードを1枚引く
-  await drawRef
+  drawRef
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        return (
-          (id = doc.id), (mark = doc.data().mark), (number = doc.data().number)
-        ) /*eslint no-sequences: "error"*/
+        // 引いたカードを手札にする
+        roomRef.update({
+          [`member.${userId}.mark`]: doc.data().mark,
+          [`member.${userId}.number`]: doc.data().number
+        })
+        // 使ったカードは削除する
+        trumpRef.doc(doc.id).delete()
       })
     })
     .catch((e) => {
       console.log(e)
     })
-
-  // 引いたカードを使用済みにする
-  await trumpRef
-    .doc(id)
-    .update({
-      used: true
-    })
-    .then(() => {
-      console.log('カード使ったよ')
-    })
-    .catch((e) => {
-      console.error(e)
-    })
-
-  // 引いたカードを手札にする
-  roomRef.update({
-    [`member.${userId}.mark`]: mark,
-    [`member.${userId}.number`]: number
-  })
 }
