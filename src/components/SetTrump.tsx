@@ -9,8 +9,7 @@ export const SetTrump = (roomId: string) => {
     for (let m = 0; m < 4; m++) {
       trumpRef.add({
         mark: mark[m],
-        number: i,
-        used: false
+        number: i
       })
     }
   }
