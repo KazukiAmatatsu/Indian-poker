@@ -5,6 +5,7 @@ import { customAlphabet } from 'nanoid'
 import { numbers } from 'nanoid-dictionary'
 import { useHistory } from 'react-router-dom'
 import { SetTrump } from 'components/SetTrump'
+import Button from 'components/stylesParts/Button'
 
 const HostButton = () => {
   const userInfo = useRecoilValue(user)
@@ -45,7 +46,7 @@ const HostButton = () => {
 
   return (
     <>
-      <button onClick={createRoom}>部屋をつくる</button>
+      <Button onClick={createRoom}>部屋をつくる</Button>
     </>
   )
 }

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { db } from 'config/firebase'
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
-import { DrawButton } from 'components/button/DrawButton'
+import { Draw } from 'components/Draw'
+import Button from 'components/stylesParts/Button'
 
 const GameStartButton = () => {
   const roomInfo = useRecoilValue(room)
@@ -26,13 +27,13 @@ const GameStartButton = () => {
       .update({
         [`member.${userId}.isReady`]: true
       })
-    DrawButton(userId, roomId)
+    Draw(userId, roomId)
     setReady(true)
   }
 
   const GameStart = async () => {
     const roomRef = db.collection('room').doc(roomId)
-    await DrawButton(userId, roomId)
+    await Draw(userId, roomId)
     await roomRef.update({
       isGaming: true
     })
@@ -41,14 +42,14 @@ const GameStartButton = () => {
   return (
     <>
       {!isHost && !roomInfo.isGaming && (
-        <button onClick={() => readyButton()} disabled={ready}>
+        <Button onClick={() => readyButton()} disabled={ready}>
           {ready ? 'OK!!' : 'Ready?'}
-        </button>
+        </Button>
       )}
       {isHost && !roomInfo.isGaming && (
-        <button onClick={() => GameStart()} disabled={!allReady}>
+        <Button onClick={() => GameStart()} disabled={!allReady}>
           ゲームスタート
-        </button>
+        </Button>
       )}
     </>
   )

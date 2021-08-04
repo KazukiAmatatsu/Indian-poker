@@ -1,11 +1,12 @@
 import { db } from 'config/firebase'
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
-import { DrawButton } from 'components/button/DrawButton'
-import { EnterButton } from 'components/button/EnterButton'
+import { Draw } from 'components/Draw'
+import { Enter } from 'components/Enter'
 import Hands from 'components/display/Hands'
 import MyHand from 'components/display/MyHand'
 import Result from 'components/display/Result'
+import Button from 'components/stylesParts/Button'
 // import ContinueButton from 'components/button/ContinueButton'
 
 const Game = () => {
@@ -39,14 +40,14 @@ const Game = () => {
         <></>
       ) : (
         <>
-          <button onClick={() => DrawButton(userId, roomId)}>どろー</button>
-          <button
+          <Button onClick={() => Draw(userId, roomId)}>どろー</Button>
+          <Button
             onClick={() => {
-              EnterButton(userId, roomId)
+              Enter(userId, roomId)
             }}
           >
             これで決まり
-          </button>
+          </Button>
         </>
       )}
       {enterCheck?.every((val) => {
@@ -59,7 +60,7 @@ const Game = () => {
               {/* <ContinueButton /> */}
             </>
           ) : (
-            <button onClick={() => gameFinish()}>結果発表</button>
+            <Button onClick={() => gameFinish()}>結果発表</Button>
           )}
         </>
       ) : (

@@ -4,6 +4,7 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { GetRoomID } from 'components/GetRoomID'
+import Button from 'components/stylesParts/Button'
 
 const GuestButton = () => {
   const userInfo = useRecoilValue(user)
@@ -60,7 +61,7 @@ const GuestButton = () => {
           <span style={{ color: 'red' }}>招待コードを入力してください</span>
         )}
       </form>
-      <button onClick={joinRoom}>部屋に入る</button>
+      <Button onClick={joinRoom}>部屋に入る</Button>
     </>
   )
 }

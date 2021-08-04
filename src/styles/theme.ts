@@ -6,13 +6,14 @@ export const theme = {
     large: '20px',
     heading: '28px'
   },
-  color: '#00AD9F',
+  color: '#3c4043',
+  buttonColor: '#f8f9fa',
+  modalColor: '#f8f9fa',
   colors: {
-    green: '',
-    blue: '',
-    red: '',
-    orange: '',
-    pink: ''
+    green: '#2e8b57',
+    red: '#8b0000',
+    white: '#f0f0f0',
+    black: '#101010'
   }
 }
 

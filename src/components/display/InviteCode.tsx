@@ -1,6 +1,7 @@
 import { room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Button from 'components/stylesParts/Button'
 
 const InviteCode = () => {
   const roomInfo = useRecoilValue(room)
@@ -12,7 +13,7 @@ const InviteCode = () => {
         text={roomInfo.inviteCode}
         onCopy={() => alert(`コピーしました！`)}
       >
-        <button>コピー</button>
+        <Button>コピー</Button>
       </CopyToClipboard>
     </div>
   )

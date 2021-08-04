@@ -2,6 +2,7 @@ import { db } from 'config/firebase'
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { useHistory } from 'react-router-dom'
+import Button from 'components/stylesParts/Button'
 
 const ContinueButton = () => {
   const userInfo = useRecoilValue(user)
@@ -71,8 +72,8 @@ const ContinueButton = () => {
     <>
       {roomInfo.finished ? (
         <>
-          <button onClick={() => playAgain()}>もう一度あそぶ</button>
-          <button onClick={() => leaveRoom()}>部屋を出る</button>
+          <Button onClick={() => playAgain()}>もう一度あそぶ</Button>
+          <Button onClick={() => leaveRoom()}>部屋を出る</Button>
         </>
       ) : (
         <></>
