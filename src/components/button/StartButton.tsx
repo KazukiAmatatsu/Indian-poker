@@ -33,9 +33,11 @@ export const StartButton = () => {
       <Modal size="small" isOpen={isOpen} closed={() => setIsOpen(false)}>
         <Form onSubmit={setUser} value={'あなたのお名前は'}>
           <input type="name" {...register('name', { required: true })} />
-          {errors.name && <span>プレイヤー名を入力してください</span>}
+          {errors.name && (
+            <span className="errMessage">プレイヤー名を入力してください</span>
+          )}
+          <Button onClick={setUser}>決定</Button>
         </Form>
-        <Button onClick={setUser}>決定</Button>
       </Modal>
     </>
   )

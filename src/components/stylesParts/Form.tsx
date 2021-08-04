@@ -30,19 +30,17 @@ const StyledForm = styled.form`
   flex-direction: column;
   p {
     font-size: 2rem;
-    margin: 0.8rem;
   }
   input {
-    width: 100%;
-    min-width: 100px;
-    max-width: 300px;
+    min-width: 300px;
+    max-width: 600px;
     background: #fff;
     border: 1px solid #dfe1e5;
     box-shadow: none;
     border-radius: 2.4rem;
     outline: none;
     height: 4.4rem;
-    margin: 0 auto;
+    margin: 0.8rem auto;
     padding: 0.5rem 2rem;
     font-size: 2rem;
     font-weight: bold;
@@ -55,8 +53,7 @@ const StyledForm = styled.form`
       border-color: #dfe1e5;
     }
   }
-
-  span {
+  .errMessage {
     font-size: 1.6rem;
     color: red;
   }

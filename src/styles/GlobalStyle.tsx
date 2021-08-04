@@ -17,10 +17,14 @@ const GlobalStyle = createGlobalStyle`
   }
   .box {
     padding: 16px;
-    border: 0.2rem solid #f8f9fa;
+    border: 0.3rem solid #f8f9fa;
   }
   .fill {
     width: 100%;
+  }
+  .w-90 {
+    width: 90%;
+    margin: 0 auto;
   }
   .w-full{
     width: 100vw;

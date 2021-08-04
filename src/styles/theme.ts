@@ -11,7 +11,7 @@ export const theme = {
   modalColor: '#f8f9fa',
   colors: {
     green: '#2e8b57',
-    red: '#8b0000',
+    red: '#dc143c',
     white: '#f0f0f0',
     black: '#101010'
   }

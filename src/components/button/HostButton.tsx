@@ -46,7 +46,9 @@ const HostButton = () => {
 
   return (
     <>
-      <Button onClick={createRoom}>部屋をつくる</Button>
+      <Button className="fill" onClick={createRoom}>
+        部屋をつくる
+      </Button>
     </>
   )
 }
