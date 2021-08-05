@@ -16,7 +16,13 @@ const GlobalStyle = createGlobalStyle`
     color: #3c4043;
   }
   .box {
-    padding: 16px;
+    padding: 1.6rem;
+    border: 0.3rem solid #f8f9fa;
+  }
+  .frame {
+    width: auto;
+    padding: 1.6rem 5rem;
+    margin: 0.8rem auto;
     border: 0.3rem solid #f8f9fa;
   }
   .fill {
@@ -41,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
   }
   .between {
-    width: 100%;
+    /* width: 100%; */
     justify-content: space-between;
     align-items: center;
   }
@@ -49,9 +55,6 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
   /* 余白 */
-  .m--8 {
-    margin: -8px;
-  }
   .m-4 {
     margin: 4px;
   }

@@ -7,7 +7,7 @@ import styled from 'styled-components'
 const InviteCode = () => {
   const roomInfo = useRecoilValue(room)
   return (
-    <StyledInviteCode className="box flex between">
+    <StyledInviteCode className="frame flex between">
       <h2>招待コード</h2>
       <p>{roomInfo.inviteCode}</p>
       <CopyToClipboard
@@ -23,8 +23,6 @@ const InviteCode = () => {
 export default InviteCode
 
 const StyledInviteCode = styled.div`
-  width: auto;
-  padding: 1.6rem 2rem;
   h2 {
     font-size: 2rem;
   }

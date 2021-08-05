@@ -12,7 +12,7 @@ const Standby = () => {
 
   return (
     <StyledStandby className="w-90">
-      <div className="box flex center">
+      <div className="frame flex center">
         <h2>
           Player：<span>{userInfo.name}</span>
         </h2>

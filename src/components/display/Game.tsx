@@ -3,11 +3,8 @@ import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { Draw } from 'components/Draw'
 import { Enter } from 'components/Enter'
-import Hands from 'components/display/Hands'
-import MyHand from 'components/display/MyHand'
-import Result from 'components/display/Result'
-import Button from 'components/stylesParts/Button'
-// import ContinueButton from 'components/button/ContinueButton'
+import { Hands, MyHand, Result } from 'components/display'
+import { Button } from 'components/stylesParts'
 
 const Game = () => {
   const userInfo = useRecoilValue(user)
@@ -30,7 +27,6 @@ const Game = () => {
 
   return (
     <>
-      <>Game</>
       <h2>相手の手札</h2>
       <Hands />
       <hr />
@@ -57,7 +53,6 @@ const Game = () => {
           {roomInfo.finished ? (
             <>
               <Result />
-              {/* <ContinueButton /> */}
             </>
           ) : (
             <Button onClick={() => gameFinish()}>結果発表</Button>

@@ -9,6 +9,7 @@ export const theme = {
   color: '#3c4043',
   buttonColor: '#f8f9fa',
   modalColor: '#f8f9fa',
+  boderColor: '#dadce0',
   colors: {
     green: '#2e8b57',
     red: '#dc143c',

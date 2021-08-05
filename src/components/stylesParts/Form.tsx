@@ -36,7 +36,6 @@ const StyledForm = styled.form`
     max-width: 600px;
     background: #fff;
     border: 1px solid #dfe1e5;
-    box-shadow: none;
     border-radius: 2.4rem;
     outline: none;
     height: 4.4rem;
@@ -46,11 +45,9 @@ const StyledForm = styled.form`
     font-weight: bold;
     :hover {
       box-shadow: 0 1px 6px #202124;
-      border-color: #dfe1e5;
     }
     :focus {
       box-shadow: 0 1px 6px #202124;
-      border-color: #dfe1e5;
     }
   }
   .errMessage {
