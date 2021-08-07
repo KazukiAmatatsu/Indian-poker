@@ -7,14 +7,14 @@ export const theme = {
     heading: '28px'
   },
   color: '#3c4043',
+  background: '#2e8b57',
   buttonColor: '#f8f9fa',
-  modalColor: '#f8f9fa',
-  boderColor: '#dadce0',
+  borderColor: '#dadce0',
   colors: {
-    green: '#2e8b57',
-    red: '#dc143c',
+    red: '#cc0000',
     white: '#f0f0f0',
-    black: '#101010'
+    black: '#202020',
+    gray: '#333333'
   }
 }
 

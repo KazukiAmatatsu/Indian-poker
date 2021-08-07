@@ -19,7 +19,8 @@ export const StyledButton = styled.button`
   position: relative;
   display: inline-block;
   padding: 0 1.6rem;
-  margin: 1.1rem 0;
+  margin: 0.8rem;
+  min-width: 10rem;
   height: 3.6rem;
   cursor: pointer;
   -webkit-user-select: none;

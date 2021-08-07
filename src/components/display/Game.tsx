@@ -19,6 +19,15 @@ const Game = () => {
     })
   }
 
+  const enter = roomInfo.member?.[userId].enter
+  const draw = () => {
+    if (!enter) {
+      Draw(userId, roomId)
+    } else {
+      alert('もう決定しているのでカードを変えることはできません')
+    }
+  }
+
   const enterCheck =
     member &&
     Object.values(member).map((player) => {
@@ -27,35 +36,36 @@ const Game = () => {
 
   return (
     <>
-      <h2>相手の手札</h2>
       <Hands />
-      <hr />
-      <h2>自分の手札</h2>
       <MyHand />
       {roomInfo.member?.[userId].enter ? (
         <></>
       ) : (
-        <>
-          <Button onClick={() => Draw(userId, roomId)}>どろー</Button>
+        <div>
+          <Button onClick={() => draw()} className="mr-8">
+            ドロー
+          </Button>
           <Button
             onClick={() => {
               Enter(userId, roomId)
             }}
           >
-            これで決まり
+            決定
           </Button>
-        </>
+        </div>
       )}
       {enterCheck?.every((val) => {
         return val
       }) ? (
         <>
           {roomInfo.finished ? (
-            <>
+            <div className="w-50">
               <Result />
-            </>
+            </div>
           ) : (
-            <Button onClick={() => gameFinish()}>結果発表</Button>
+            <div>
+              <Button onClick={() => gameFinish()}>結果発表</Button>
+            </div>
           )}
         </>
       ) : (

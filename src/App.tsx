@@ -1,8 +1,9 @@
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from 'styles/GlobalStyle'
 import { theme } from 'styles/theme'
+import { Layout } from 'styles/Layout/Layout'
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Top, Standby, Room } from 'Pages'
 
 import { RecoilRoot, MutableSnapshot } from 'recoil'
@@ -20,28 +21,19 @@ function App() {
   return (
     <RecoilRoot initializeState={initializeState}>
       <RecoilStatePersist />
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Router>
-          <ul>
-            <li>
-              <Link to="/">TOP</Link>
-            </li>
-            <li>
-              <Link to="/Standby">Standby</Link>
-            </li>
-            <li>
-              <Link to="/Room">Room</Link>
-            </li>
-          </ul>
-          <RedirectTop />
-          <Switch>
-            <Route exact path="/" component={Top} />
-            <Route exact path="/Standby" component={Standby} />
-            <Route exact path="/Room/:id" component={Room} />
-          </Switch>
-        </Router>
-      </ThemeProvider>
+      <Router>
+        <RedirectTop />
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Layout>
+            <Switch>
+              <Route exact path="/" component={Top} />
+              <Route exact path="/Standby" component={Standby} />
+              <Route exact path="/Room/:id" component={Room} />
+            </Switch>
+          </Layout>
+        </ThemeProvider>
+      </Router>
     </RecoilRoot>
   )
 }

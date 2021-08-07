@@ -38,7 +38,7 @@ const StyledMember = styled.div`
       font-size: 2rem;
       font-weight: bold;
       padding: 1rem 3rem;
-      border: 0.1rem solid ${(props) => props.theme.boderColor};
+      border: 0.1rem solid ${(props) => props.theme.borderColor};
       border-radius: 1rem;
       .userName {
         color: ${(props) => props.theme.colors.red};

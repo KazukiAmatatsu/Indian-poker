@@ -14,7 +14,7 @@ const InviteCode = () => {
         text={roomInfo.inviteCode}
         onCopy={() => alert(`コピーしました！`)}
       >
-        <Button>コピー</Button>
+        <Button className="copyButton">コピー</Button>
       </CopyToClipboard>
     </StyledInviteCode>
   )
@@ -29,5 +29,11 @@ const StyledInviteCode = styled.div`
   p {
     font-size: 3rem;
     font-weight: bold;
+  }
+  .copyButton {
+    color: #fff;
+    font-weight: bold;
+    background-color: ${(props) => props.theme.colors.black};
+    border-radius: 3rem;
   }
 `

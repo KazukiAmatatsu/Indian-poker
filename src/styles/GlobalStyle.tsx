@@ -23,13 +23,20 @@ const GlobalStyle = createGlobalStyle`
     width: auto;
     padding: 1.6rem 5rem;
     margin: 0.8rem auto;
-    border: 0.3rem solid #f8f9fa;
+    border: 0.3rem solid ${(props) => props.theme.borderColor};
+    background-color: ${(props) => props.theme.colors.white};
   }
   .fill {
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
   .w-90 {
     width: 90%;
+    margin: 0 auto;
+  }
+  .w-50 {
+    width: 50%;
     margin: 0 auto;
   }
   .w-full{
@@ -38,6 +45,9 @@ const GlobalStyle = createGlobalStyle`
   .h-full {
     height: 100vh;
   }
+  .p-30 {
+    padding: 3rem 0;
+  }
   /* Flexbox */
   .flex {
     display: flex;
@@ -45,6 +55,7 @@ const GlobalStyle = createGlobalStyle`
   .center {
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
   .between {
     /* width: 100%; */
@@ -87,13 +98,6 @@ const GlobalStyle = createGlobalStyle`
   }
   .ml-16 {
     margin-left: 16px;
-  }
-  /* 背景 */
-  .bgc-g {
-    background-color: ${(props) => props.theme.colors.green};
-  }
-  .bgc-w {
-    background-color: ${(props) => props.theme.colors.white};
   }
 `
 

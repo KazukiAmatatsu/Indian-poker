@@ -1,13 +1,14 @@
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
+import { Card } from 'components/stylesParts'
 
 const Hands = () => {
   const roomInfo = useRecoilValue(room)
   const userInfo = useRecoilValue(user)
   const member = roomInfo.member
   return (
-    <>
+    <StyledHands>
       {member &&
         Object.entries(member).map(([key, data]) => {
           let number: number | string = ''
@@ -25,33 +26,32 @@ const Hands = () => {
 
           if (key !== userInfo.id) {
             return (
-              <StyledHands>
+              <Card red={data.mark === '♥' || data.mark === '♦'}>
                 <div className="cardFrame">
-                  <div className="head">
-                    <div className="number">{number}</div>
-                    <div className="mark">{data.mark}</div>
+                  <div className="front">
+                    <div className="head">
+                      <div className="number">{number}</div>
+                      <div className="mark">{data.mark}</div>
+                    </div>
+                    <div className="userName">{data.name}</div>
+                    <div className="foot">
+                      <div className="mark">{data.mark}</div>
+                      <div className="number">{number}</div>
+                    </div>
                   </div>
-                  <div>{data.mark}</div>
-                  <div className="foot">
-                    <div className="mark">{data.mark}</div>
-                    <div className="number">{number}</div>
-                  </div>
-                  <p>{data.name}</p>
                 </div>
-              </StyledHands>
+              </Card>
             )
           } else {
             return <></>
           }
         })}
-    </>
+    </StyledHands>
   )
 }
 
 export default Hands
 
 const StyledHands = styled.div`
-  width: 5.8rem;
-  height: 8.9rem;
-  border: 0.1rem solid #000;
+  border-bottom: 0.2rem solid ${(props) => props.theme.borderColor};
 `
