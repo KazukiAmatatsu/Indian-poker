@@ -42,7 +42,7 @@ const GameStartButton = () => {
   return (
     <>
       {!isHost && !roomInfo.isGaming && (
-        <Button className="fill" onClick={() => readyButton()} disabled={ready}>
+        <Button onClick={() => readyButton()} disabled={ready}>
           {ready ? 'OK!!' : 'Ready?'}
         </Button>
       )}
