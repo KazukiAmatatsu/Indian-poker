@@ -6,6 +6,9 @@ export const Main: FC = ({ children }) => {
 }
 
 const StyledBody = styled.div`
-  width: 100%;
-  padding: 3rem 0;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 7rem;
 `

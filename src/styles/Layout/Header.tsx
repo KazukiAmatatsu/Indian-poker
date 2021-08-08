@@ -5,7 +5,7 @@ export const Header = () => {
   const history = useHistory()
   return (
     <StyledHeader className="flex center">
-      <div onClick={() => history.push('/')}>インディアンポーカー</div>
+      <div onClick={() => history.push('/')}>インディアン・ポーカー</div>
     </StyledHeader>
   )
 }

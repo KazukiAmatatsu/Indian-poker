@@ -30,6 +30,7 @@ export default Member
 const StyledMember = styled.div`
   h2 {
     font-size: 2rem;
+    font-weight: bold;
   }
   ul {
     li {

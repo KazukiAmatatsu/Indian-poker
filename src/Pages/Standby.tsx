@@ -12,20 +12,18 @@ const Standby = () => {
 
   return (
     <StyledStandby>
-      <div className="w-90 center">
-        <div className="frame flex center">
-          <h2>
-            Player：<span>{userInfo.name}</span>
-          </h2>
-        </div>
-        <div className="flex center">
-          <HostButton />
-          <Button onClick={() => setIsOpen(true)}>部屋をさがす</Button>
-        </div>
-        <Modal size="small" isOpen={isOpen} closed={() => setIsOpen(false)}>
-          <GuestButton />
-        </Modal>
+      <div className="frame flex center">
+        <h2>
+          Player：<span>{userInfo.name}</span>
+        </h2>
       </div>
+      <div className="flex center">
+        <HostButton />
+        <Button onClick={() => setIsOpen(true)}>部屋をさがす</Button>
+      </div>
+      <Modal size="small" isOpen={isOpen} closed={() => setIsOpen(false)}>
+        <GuestButton />
+      </Modal>
     </StyledStandby>
   )
 }
