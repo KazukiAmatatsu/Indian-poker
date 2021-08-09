@@ -11,12 +11,15 @@ export const Header = () => {
 }
 
 const StyledHeader = styled.div`
-  height: 5rem;
-  line-height: 5rem;
+  width: 100%;
+  height: 7vh;
+  line-height: 7vh;
   font-size: 2.5rem;
   font-weight: bold;
   color: #fff;
   background-color: ${(props) => props.theme.colors.red};
+  position: fixed;
+  z-index: 99;
   &:hover {
     cursor: pointer;
   }

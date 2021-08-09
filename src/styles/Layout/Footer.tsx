@@ -19,8 +19,8 @@ export const Footer = () => {
 
 const StyledFooter = styled.div`
   width: 100%;
-  height: 5rem;
-  line-height: 5rem;
+  height: 7vh;
+  line-height: 7vh;
   font-size: 2rem;
   font-weight: bold;
   color: #fff;
@@ -28,6 +28,7 @@ const StyledFooter = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 99;
   span {
     font-size: 2.4rem;
     margin-right: 4px;

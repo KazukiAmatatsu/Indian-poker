@@ -35,7 +35,6 @@ const Top = () => {
 export default Top
 
 const StyledTop = styled.div`
-  height: 100vh;
   .rule {
     font-size: 1.6rem;
     h2 {
