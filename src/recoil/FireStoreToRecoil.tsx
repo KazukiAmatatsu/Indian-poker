@@ -33,12 +33,12 @@ export const FireStoreToRecoil: FC = ({ children }) => {
       if (roomId) {
         unSubscribe()
       }
-      // リロード等でroomInfoが初期化されてる場合があるのでここはidから取得
+      /* リロード等でroomInfoが初期化されてる場合があるのでここはidから取得 */
       if (id) {
         const roomRef = db.collection('room').doc(id)
         const trumpRef = roomRef.collection('trump')
-        // roomInfoからだとなぜかmember{}の中身だけがうまく取得できない
-        // ここでFireStoreから再度データを取り直し
+        /* roomInfoからだとなぜかmember{}の中身だけがうまく取得できない */
+        /* ここでFireStoreから再度データを取り直し */
         roomRef.get().then((doc) => {
           const member = doc.data()?.member
           const memberId = member && Object.keys(member).length
