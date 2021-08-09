@@ -30,6 +30,7 @@ export type Room = {
   member: Member | undefined
   isGaming: boolean
   finished: boolean
+  loading: boolean
 }
 
 export const room = atom<Room>({
@@ -39,6 +40,7 @@ export const room = atom<Room>({
     inviteCode: '',
     member: {},
     isGaming: false,
-    finished: false
+    finished: false,
+    loading: false
   }
 })

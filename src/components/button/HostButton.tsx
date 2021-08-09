@@ -33,13 +33,15 @@ const HostButton = () => {
           }
         },
         isGaming: false,
-        finished: false
+        finished: false,
+        loading: false
       })
     SetTrump(roomId)
     setRoomInfo({
       ...roomInfo,
       roomId: roomId,
-      inviteCode: inviteCode
+      inviteCode: inviteCode,
+      loading: false
     })
     history.push(`/Room/${roomId}`)
   }

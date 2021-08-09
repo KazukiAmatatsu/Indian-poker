@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Card = styled.div<{ red: boolean }>`
   display: inline-block;
-  margin: 3rem;
+  margin: 0 1.6rem;
   .cardFrame {
     width: 17.4rem; // ヨコ58mm
     height: 26.7rem; // タテ89mm

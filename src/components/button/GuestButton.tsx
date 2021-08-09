@@ -37,7 +37,8 @@ const GuestButton = () => {
         setRoomInfo({
           ...roomInfo,
           roomId: roomId,
-          inviteCode: inviteCode
+          inviteCode: inviteCode,
+          loading: false
         })
         history.push(`/Room/${roomId}`)
       } else {

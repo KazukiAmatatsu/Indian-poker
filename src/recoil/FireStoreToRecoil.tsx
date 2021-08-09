@@ -62,7 +62,8 @@ export const FireStoreToRecoil: FC = ({ children }) => {
           inviteCode: '',
           member: {},
           isGaming: false,
-          finished: false
+          finished: false,
+          loading: false
         })
       }
     }

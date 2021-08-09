@@ -1,6 +1,5 @@
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
-import styled from 'styled-components'
 import { Card } from 'components/stylesParts'
 
 const Hands = () => {
@@ -8,7 +7,7 @@ const Hands = () => {
   const userInfo = useRecoilValue(user)
   const member = roomInfo.member
   return (
-    <StyledHands>
+    <div>
       {member &&
         Object.entries(member).map(([key, data]) => {
           let number: number | string = ''
@@ -46,12 +45,8 @@ const Hands = () => {
             return <></>
           }
         })}
-    </StyledHands>
+    </div>
   )
 }
 
 export default Hands
-
-const StyledHands = styled.div`
-  border-bottom: 0.2rem solid ${(props) => props.theme.borderColor};
-`

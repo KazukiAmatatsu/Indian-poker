@@ -42,7 +42,7 @@ const MyHand = () => {
       number = handRef.number
     }
     return (
-      <>
+      <div className="mt-16">
         <Card red={handRef.mark === '♥' || handRef.mark === '♦'}>
           <div className="cardFrame">
             {roomInfo.finished ? (
@@ -86,7 +86,7 @@ const MyHand = () => {
             </Button>
           </div>
         )}
-      </>
+      </div>
     )
   } else {
     return null

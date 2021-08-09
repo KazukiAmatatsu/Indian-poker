@@ -29,11 +29,11 @@ const Game = () => {
       }) ? (
         <>
           {roomInfo.finished ? (
-            <div className="w-50">
+            <div className="mt-16 w-50">
               <Result />
             </div>
           ) : (
-            <div>
+            <div className="mt-8">
               <Button onClick={() => gameFinish()}>結果発表</Button>
             </div>
           )}
