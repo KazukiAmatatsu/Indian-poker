@@ -21,7 +21,7 @@ export const FireStoreToRecoil: FC = ({ children }) => {
     let unSubscribe: () => void
     if (roomId !== '' && roomId === id) {
       const roomRef = db.collection('room').doc(roomId)
-      console.log('FireStoreToRecoil!!')
+      // console.log('FireStoreToRecoil!!')
       unSubscribe = roomRef.onSnapshot((doc) => {
         if (!doc) return history.push('/Standby')
         const roomDoc = doc.data() as Room
@@ -62,11 +62,12 @@ export const FireStoreToRecoil: FC = ({ children }) => {
           inviteCode: '',
           member: {},
           isGaming: false,
-          finished: false
+          finished: false,
+          loading: false
         })
       }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
-  console.log(roomInfo)
+  // console.log(roomInfo)
   return <>{children}</>
 }

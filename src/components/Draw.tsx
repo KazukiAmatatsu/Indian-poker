@@ -2,7 +2,7 @@ import { db } from 'config/firebase'
 import { SetTrump } from 'components/SetTrump'
 
 // userIdとroomIdを引数に渡したらカードを一枚引く関数
-export const DrawButton = async (userId: string, roomId: string) => {
+export const Draw = async (userId: string, roomId: string) => {
   const roomRef = db.collection('room').doc(roomId)
   const trumpRef = roomRef.collection('trump')
   const drawRef = trumpRef.limit(1)

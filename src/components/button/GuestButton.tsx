@@ -4,6 +4,7 @@ import { useRecoilValue, useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { GetRoomID } from 'components/GetRoomID'
+import { Button, Form } from 'components/stylesParts'
 
 const GuestButton = () => {
   const userInfo = useRecoilValue(user)
@@ -36,7 +37,8 @@ const GuestButton = () => {
         setRoomInfo({
           ...roomInfo,
           roomId: roomId,
-          inviteCode: inviteCode
+          inviteCode: inviteCode,
+          loading: false
         })
         history.push(`/Room/${roomId}`)
       } else {
@@ -50,17 +52,13 @@ const GuestButton = () => {
 
   return (
     <>
-      <form onSubmit={joinRoom}>
-        <input
-          type="code"
-          placeholder="招待コード"
-          {...register('code', { required: true })}
-        />
+      <Form onSubmit={joinRoom} value={'招待コード'}>
+        <input type="code" {...register('code', { required: true })} />
         {errors.code && (
           <span style={{ color: 'red' }}>招待コードを入力してください</span>
         )}
-      </form>
-      <button onClick={joinRoom}>部屋に入る</button>
+      </Form>
+      <Button onClick={joinRoom}>部屋に入る</Button>
     </>
   )
 }

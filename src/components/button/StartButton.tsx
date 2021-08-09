@@ -4,6 +4,7 @@ import { user } from 'recoil/atom'
 import { useRecoilState } from 'recoil'
 import { useForm } from 'react-hook-form'
 import { nanoid } from 'nanoid'
+import { Button, Form, Modal } from 'components/stylesParts'
 
 export const StartButton = () => {
   const {
@@ -16,7 +17,7 @@ export const StartButton = () => {
   const userId = nanoid(6)
   const history = useHistory()
 
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [userInfo, setUserInfo] = useRecoilState(user)
 
   const setUser = handleSubmit((data: { name: string }) => {
@@ -28,25 +29,21 @@ export const StartButton = () => {
 
   return (
     <>
-      {isOpen ? (
-        <button onClick={() => setIsOpen(!isOpen)}>Game Start</button>
-      ) : (
-        <>
-          <form onSubmit={setUser}>
-            <input
-              type="name"
-              placeholder="プレイヤー名"
-              {...register('name', { required: true })}
-            />
-            {errors.name && (
-              <span style={{ color: 'red' }}>
-                プレイヤー名を入力してください
-              </span>
-            )}
-          </form>
-          <button onClick={setUser}>名前を決定する</button>
-        </>
-      )}
+      <Button onClick={() => setIsOpen(true)}>Game Start</Button>
+      <Modal size="small" isOpen={isOpen} closed={() => setIsOpen(false)}>
+        <Form onSubmit={setUser} value={'あなたのお名前は'}>
+          <input
+            type="name"
+            {...register('name', { required: true, maxLength: 8 })}
+          />
+          {errors.name && (
+            <span className="errMessage">
+              プレイヤー名を8文字以内で入力してください
+            </span>
+          )}
+          <Button onClick={setUser}>決定</Button>
+        </Form>
+      </Modal>
     </>
   )
 }

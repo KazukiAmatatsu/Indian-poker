@@ -1,6 +1,6 @@
 import { db } from 'config/firebase'
 
-export const EnterButton = (userId: string, roomId: string) => {
+export const Enter = (userId: string, roomId: string) => {
   db.collection('room')
     .doc(roomId)
     .update({

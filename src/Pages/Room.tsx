@@ -1,27 +1,43 @@
-import { room } from 'recoil/atom'
+import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { FireStoreToRecoil } from 'recoil/FireStoreToRecoil'
-import InviteCode from 'components/display/InviteCode'
-import Member from 'components/display/Member'
-import GameStartButton from 'components/button/GameStartButton'
-import Game from 'components/display/Game'
-import ContinueButton from 'components/button/ContinueButton'
+import { InviteCode, Member, Game } from 'components/display'
+import { ContinueButton, GameStartButton } from 'components/button'
+import styled from 'styled-components'
 
 const Room = () => {
   const roomInfo = useRecoilValue(room)
+  const userInfo = useRecoilValue(user)
 
   return (
     <FireStoreToRecoil>
-      {roomInfo?.isGaming ? (
-        <>
-          <Game />
-          <ContinueButton />
-        </>
+      {roomInfo.loading ? (
+        <Loading>
+          {roomInfo.member?.[userInfo.id].enter ? (
+            <>
+              <div className="frame">
+                他のプレイヤーがもう一度遊ぶを選択しました。
+              </div>
+              <ContinueButton />
+            </>
+          ) : (
+            <div className="frame">Now Loading...</div>
+          )}
+        </Loading>
       ) : (
         <>
-          <InviteCode />
-          <Member />
-          <GameStartButton />
+          {roomInfo?.isGaming ? (
+            <>
+              <Game />
+              <ContinueButton />
+            </>
+          ) : (
+            <>
+              <InviteCode />
+              <Member />
+              <GameStartButton />
+            </>
+          )}
         </>
       )}
     </FireStoreToRecoil>
@@ -29,3 +45,7 @@ const Room = () => {
 }
 
 export default Room
+
+const Loading = styled.div`
+  font-size: 2rem;
+`
