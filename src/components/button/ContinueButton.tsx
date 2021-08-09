@@ -71,10 +71,10 @@ const ContinueButton = () => {
   return (
     <>
       {roomInfo.finished ? (
-        <>
+        <div>
           <Button onClick={() => playAgain()}>もう一度あそぶ</Button>
           <Button onClick={() => leaveRoom()}>部屋を出る</Button>
-        </>
+        </div>
       ) : (
         <></>
       )}

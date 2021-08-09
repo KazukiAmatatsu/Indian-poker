@@ -32,9 +32,14 @@ export const StartButton = () => {
       <Button onClick={() => setIsOpen(true)}>Game Start</Button>
       <Modal size="small" isOpen={isOpen} closed={() => setIsOpen(false)}>
         <Form onSubmit={setUser} value={'あなたのお名前は'}>
-          <input type="name" {...register('name', { required: true })} />
+          <input
+            type="name"
+            {...register('name', { required: true, maxLength: 8 })}
+          />
           {errors.name && (
-            <span className="errMessage">プレイヤー名を入力してください</span>
+            <span className="errMessage">
+              プレイヤー名を8文字以内で入力してください
+            </span>
           )}
           <Button onClick={setUser}>決定</Button>
         </Form>
