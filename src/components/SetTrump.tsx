@@ -13,5 +13,5 @@ export const SetTrump = (roomId: string) => {
       })
     }
   }
-  console.log('トランプできたよ')
+  // console.log('トランプできたよ')
 }
