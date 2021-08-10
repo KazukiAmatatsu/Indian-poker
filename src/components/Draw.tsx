@@ -10,23 +10,21 @@ export const Draw = async (userId: string, roomId: string) => {
   const deck = await trumpRef.get()
   const deckList = deck.docs.map((doc) => doc.id)
 
-  // もしカードが残り0枚ならもう一度セットトランプする
+  /* もしカードが残り0枚ならもう一度セットトランプする */
   if (deckList.length === 0) {
     SetTrump(roomId)
     alert('トランプをリセットしました！')
   }
 
-  // カードを1枚引く
+  /* カードを1枚引く */
   drawRef
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        // 引いたカードを手札にする
         roomRef.update({
           [`member.${userId}.mark`]: doc.data().mark,
           [`member.${userId}.number`]: doc.data().number
         })
-        // 使ったカードは削除する
         trumpRef.doc(doc.id).delete()
       })
     })

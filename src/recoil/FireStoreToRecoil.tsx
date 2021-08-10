@@ -11,7 +11,6 @@ export const FireStoreToRecoil: FC = ({ children }) => {
   const history = useHistory()
 
   let roomId: string
-  // リロード等でroomIdが消えたらStandbyにhistory
   if (roomInfo.roomId) {
     roomId = roomInfo.roomId
   } else {
@@ -21,14 +20,12 @@ export const FireStoreToRecoil: FC = ({ children }) => {
     let unSubscribe: () => void
     if (roomId !== '' && roomId === id) {
       const roomRef = db.collection('room').doc(roomId)
-      // console.log('FireStoreToRecoil!!')
       unSubscribe = roomRef.onSnapshot((doc) => {
         if (!doc) return history.push('/Standby')
         const roomDoc = doc.data() as Room
         setRoomInfo(roomDoc)
       })
     }
-    // Roomコンポーネントから移動したらreturn()の処理が動く
     return () => {
       if (roomId) {
         unSubscribe()
@@ -68,6 +65,5 @@ export const FireStoreToRecoil: FC = ({ children }) => {
       }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
-  // console.log(roomInfo)
   return <>{children}</>
 }
