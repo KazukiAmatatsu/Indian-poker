@@ -4,8 +4,8 @@ export const Card = styled.div<{ red: boolean }>`
   display: inline-block;
   margin: 0 1.6rem;
   .cardFrame {
-    width: 17.4rem; // ヨコ58mm
-    height: 26.7rem; // タテ89mm
+    width: 17.4rem; /* ヨコ58mm */
+    height: 26.7rem; /* タテ89mm */
     font-size: 3rem;
     text-align: center;
     border-radius: 0.8rem;

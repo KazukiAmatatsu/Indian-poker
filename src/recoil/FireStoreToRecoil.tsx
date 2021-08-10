@@ -11,7 +11,6 @@ export const FireStoreToRecoil: FC = ({ children }) => {
   const history = useHistory()
 
   let roomId: string
-  // リロード等でroomIdが消えたらStandbyにhistory
   if (roomInfo.roomId) {
     roomId = roomInfo.roomId
   } else {
@@ -21,24 +20,22 @@ export const FireStoreToRecoil: FC = ({ children }) => {
     let unSubscribe: () => void
     if (roomId !== '' && roomId === id) {
       const roomRef = db.collection('room').doc(roomId)
-      // console.log('FireStoreToRecoil!!')
       unSubscribe = roomRef.onSnapshot((doc) => {
         if (!doc) return history.push('/Standby')
         const roomDoc = doc.data() as Room
         setRoomInfo(roomDoc)
       })
     }
-    // Roomコンポーネントから移動したらreturn()の処理が動く
     return () => {
       if (roomId) {
         unSubscribe()
       }
-      // リロード等でroomInfoが初期化されてる場合があるのでここはidから取得
+      /* リロード等でroomInfoが初期化されてる場合があるのでここはidから取得 */
       if (id) {
         const roomRef = db.collection('room').doc(id)
         const trumpRef = roomRef.collection('trump')
-        // roomInfoからだとなぜかmember{}の中身だけがうまく取得できない
-        // ここでFireStoreから再度データを取り直し
+        /* roomInfoからだとなぜかmember{}の中身だけがうまく取得できない */
+        /* ここでFireStoreから再度データを取り直し */
         roomRef.get().then((doc) => {
           const member = doc.data()?.member
           const memberId = member && Object.keys(member).length
@@ -68,6 +65,5 @@ export const FireStoreToRecoil: FC = ({ children }) => {
       }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
-  // console.log(roomInfo)
   return <>{children}</>
 }
