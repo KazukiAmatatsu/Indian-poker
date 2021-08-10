@@ -12,7 +12,6 @@ const ContinueButton = () => {
   const history = useHistory()
 
   const playAgain = async () => {
-    // プレイ中の部屋から出る最初の人がホストになる
     if (
       member &&
       Object.values(member).filter((id) => id?.enter).length ===
@@ -41,7 +40,6 @@ const ContinueButton = () => {
         }
       })
     }
-    // プレイ中の部屋から出る最後の人はルームを元に戻す処理をする
     if (
       member &&
       Object.values(member).filter((id) => id?.enter).length === 1 // enterがtrueの人がまだプレイ中の部屋に残っている人
@@ -60,7 +58,6 @@ const ContinueButton = () => {
   }
 
   const leaveRoom = async () => {
-    // プレイ中の部屋から出る最後の人はルームを元に戻す処理をする
     if (
       member &&
       Object.values(member).filter((id) => id?.enter).length === 1
@@ -71,7 +68,6 @@ const ContinueButton = () => {
         loading: false
       })
     }
-    // StandbyにhistoryすればFireStoreToRecoilのreturnが着火するから部屋から退出できる
     history.push('/Standby')
   }
 
