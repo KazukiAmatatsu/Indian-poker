@@ -1,6 +1,7 @@
 import { user, room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
+import { sp, tab } from 'media'
 
 const Member = () => {
   const roomInfo = useRecoilValue(room)
@@ -44,6 +45,12 @@ const StyledMember = styled.div`
       .userName {
         color: ${(props) => props.theme.colors.red};
       }
+      ${tab`
+        padding: 1rem 2rem;
+      `}
+      ${sp`
+        padding: 1rem;
+      `}
     }
   }
 `
