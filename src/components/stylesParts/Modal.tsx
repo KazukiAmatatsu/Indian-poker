@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { sp, tab } from 'media'
 
 export type ModalProps = {
   className?: string
@@ -22,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({
         onClick={closed}
       >
         <StyleModal
-          className={`flex center column box ${size} ${className}`}
+          className={`flex center column ${size} ${className}`}
           onClick={(e) => e.stopPropagation()}
         >
           {children}
@@ -54,7 +55,7 @@ const StyleOverlay = styled.div`
   }
 `
 const StyleModal = styled.div`
-  width: 90%;
+  width: 70%;
   max-height: 70%;
   background-color: #fff;
   box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
@@ -73,4 +74,10 @@ const StyleModal = styled.div`
     height: 70%;
     max-height: 70%;
   }
+  ${tab`
+    width: 80%;
+  `}
+  ${sp`
+    width: 90%;
+  `}
 `

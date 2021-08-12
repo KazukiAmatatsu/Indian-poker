@@ -1,6 +1,7 @@
 import { room } from 'recoil/atom'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
+import { sp } from 'media'
 
 const Result = () => {
   const roomInfo = useRecoilValue(room)
@@ -42,7 +43,6 @@ const Result = () => {
 export default Result
 
 const StyledResult = styled.div`
-  width: 50%;
   font-size: 3rem;
   li {
     display: table;
@@ -66,4 +66,16 @@ const StyledResult = styled.div`
     width: 70%;
     font-weight: bold;
   }
+  ${sp`
+    font-size: 2rem;
+    .rank {
+      width: 20%;
+    }
+    .unit {
+      font-size: 1.5rem;
+    }
+    .user {
+      width: 80%;
+    }
+  `}
 `
