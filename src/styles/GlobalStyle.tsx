@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+import { sp, tab } from 'media'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -15,16 +16,19 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.4rem;
     color: #3c4043;
   }
-  .box {
-    padding: 1.6rem;
-    border: 0.3rem solid #f8f9fa;
-  }
   .frame {
     width: auto;
     padding: 1.6rem 5rem;
     margin: 0.8rem auto;
     border: 0.3rem solid ${(props) => props.theme.borderColor};
     background-color: ${(props) => props.theme.colors.white};
+    ${tab`
+      padding: 1.6rem 3rem;
+    `}
+    ${sp`
+      padding: 1.6rem 1rem;
+    `}
+
   }
   .fill {
     width: 100%;
@@ -38,6 +42,12 @@ const GlobalStyle = createGlobalStyle`
   .w-50 {
     width: 50%;
     margin: 0 auto;
+    ${tab`
+      width: 90%;
+    `}
+    ${sp`
+      width: 90%;
+    `}
   }
   .w-full{
     width: 100vw;

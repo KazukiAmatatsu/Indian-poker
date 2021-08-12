@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { sp } from 'media'
 
 export type FormProps = {
   className?: string
@@ -54,4 +55,10 @@ const StyledForm = styled.form`
     font-size: 1.6rem;
     color: red;
   }
+  ${sp`
+    input {
+      min-width: 100px;
+      max-width: 200px;
+    }
+  `}
 `
