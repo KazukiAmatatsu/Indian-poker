@@ -79,16 +79,16 @@ const StyledTop = styled.div`
   }
   .text {
     text-align: left;
-  }
-  h3 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  p {
-    padding: 0 1.5rem;
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-    font-size: 1.6rem;
+    h3 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    p {
+      padding: 0 1.5rem;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+      font-size: 1.6rem;
+    }
   }
   ${tab`
     .firstView {
@@ -106,12 +106,14 @@ const StyledTop = styled.div`
     h2 {
       font-size: 2.0rem;
     }
-    h3 {
-      font-size: 1.6rem;
-    }
-    p {
-      padding: 0 1rem;
-      font-size: 1.4rem;
+    .text {
+      h3 {
+        font-size: 1.6rem;
+      }
+      p {
+        padding: 0 1rem;
+        font-size: 1.4rem;
+      }
     }
     `}
   ${sp`
@@ -131,12 +133,14 @@ const StyledTop = styled.div`
     h2 {
       font-size: 1.6rem;
     }
-    h3 {
-      font-size: 1.4rem;
-    }
-    p {
-      padding: 0 1rem;
-      font-size: 1.2rem;
+    .text {
+      h3 {
+        font-size: 1.4rem;
+      }
+      p {
+        padding: 0 1rem;
+        font-size: 1.2rem;
+      }
     }
   `}
 `
