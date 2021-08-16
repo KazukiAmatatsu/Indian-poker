@@ -36,7 +36,7 @@ const HostButton = () => {
         finished: false,
         loading: false
       })
-    SetTrump(roomId)
+    await SetTrump(roomId)
     setRoomInfo({
       ...roomInfo,
       roomId: roomId,

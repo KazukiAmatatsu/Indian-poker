@@ -22,7 +22,8 @@ const GuestButton = () => {
     if (inviteCode.length === 6) {
       const roomId = await GetRoomID(inviteCode)
       if (roomId) {
-        db.collection('room')
+        await db
+          .collection('room')
           .doc(roomId)
           .update({
             [`member.${userInfo.id}`]: {

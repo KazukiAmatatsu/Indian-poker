@@ -12,12 +12,12 @@ export const Draw = async (userId: string, roomId: string) => {
 
   /* もしカードが残り0枚ならもう一度セットトランプする */
   if (deckList.length === 0) {
-    SetTrump(roomId)
+    await SetTrump(roomId)
     alert('トランプをリセットしました！')
   }
 
   /* カードを1枚引く */
-  drawRef
+  await drawRef
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
