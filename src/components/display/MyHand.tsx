@@ -15,12 +15,12 @@ const MyHand = () => {
   const enter = roomInfo.member?.[userId].enter
   const [state, setState] = useState(false)
 
-  const draw = async () => {
+  const draw = () => {
     if (!enter) {
       setState(true)
-      setTimeout(() => {
+      setTimeout(async () => {
         setState(false)
-        Draw(userId, roomId)
+        await Draw(userId, roomId)
       }, 1200)
     } else {
       alert('もう決定しているのでカードを変えることはできません')

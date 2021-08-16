@@ -17,7 +17,7 @@ const ContinueButton = () => {
       Object.values(member).filter((id) => id?.enter).length ===
         Object.keys(member).length
     ) {
-      roomRef.update({
+      await roomRef.update({
         [`member.${userInfo.id}`]: {
           name: userInfo.name,
           mark: '',
@@ -29,7 +29,7 @@ const ContinueButton = () => {
       })
       alert('このルームのホストになりました！')
     } else {
-      roomRef.update({
+      await roomRef.update({
         [`member.${userInfo.id}`]: {
           name: userInfo.name,
           mark: '',

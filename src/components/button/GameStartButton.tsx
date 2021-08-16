@@ -21,13 +21,14 @@ const GameStartButton = () => {
     Object.values(member).length ===
       Object.values(member).filter((id) => id?.isReady).length
 
-  const readyButton = () => {
-    db.collection('room')
+  const readyButton = async () => {
+    await db
+      .collection('room')
       .doc(roomId)
       .update({
         [`member.${userId}.isReady`]: true
       })
-    Draw(userId, roomId)
+    await Draw(userId, roomId)
     setReady(true)
   }
 
