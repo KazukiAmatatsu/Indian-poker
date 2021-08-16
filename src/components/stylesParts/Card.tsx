@@ -55,6 +55,23 @@ export const Card = styled.div<{ red: boolean }>`
       transform: rotate(180deg);
       color: ${(props) => props.theme.colors.white};
     }
+    .enterRibbon {
+      position: absolute;
+      padding: 0.6rem 0;
+      right: -2.3rem;
+      top: 0.8rem;
+      width: 9rem;
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 1.6rem;
+      background: #ffa520;
+      color: #fff;
+      font-weight: bold;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+    }
     .userName {
       position: absolute;
       top: 50%;

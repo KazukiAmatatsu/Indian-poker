@@ -8,8 +8,8 @@ const Game = () => {
   const roomInfo = useRecoilValue(room)
   const member = roomInfo.member
 
-  const gameFinish = () => {
-    db.collection('room').doc(roomInfo.roomId).update({
+  const gameFinish = async () => {
+    await db.collection('room').doc(roomInfo.roomId).update({
       finished: true
     })
   }

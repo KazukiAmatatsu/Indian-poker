@@ -18,10 +18,10 @@ const MyHand = () => {
   const draw = () => {
     if (!enter) {
       setState(true)
-      Draw(userId, roomId)
-      setTimeout(() => {
+      setTimeout(async () => {
         setState(false)
-      }, 500)
+        await Draw(userId, roomId)
+      }, 1200)
     } else {
       alert('もう決定しているのでカードを変えることはできません')
     }
@@ -44,8 +44,8 @@ const MyHand = () => {
     return (
       <div className="mt-16">
         <Card red={handRef.mark === '♥' || handRef.mark === '♦'}>
-          <div className="cardFrame">
-            {roomInfo.finished ? (
+          {roomInfo.finished ? (
+            <div className="cardFrame">
               <div className="front">
                 <div className="head">
                   <div className="number">{number}</div>
@@ -57,20 +57,34 @@ const MyHand = () => {
                   <div className="number">{number}</div>
                 </div>
               </div>
-            ) : (
-              <Transition in={state} timeout={500}>
-                {(state) => (
-                  <Animation
-                    state={state}
-                    className="back"
-                    onClick={() => draw()}
-                  ></Animation>
-                )}
-              </Transition>
-            )}
-          </div>
+            </div>
+          ) : (
+            <Transition in={state} timeout={{ enter: 1000, exit: 500 }}>
+              {(state) => (
+                <Animation
+                  state={state}
+                  className="cardFrame"
+                  onClick={() => draw()}
+                >
+                  <div className="back">
+                    <div className="front">
+                      <div className="head">
+                        <div className="number">{number}</div>
+                        <div className="mark">{handRef.mark}</div>
+                      </div>
+                      <div className="userName">{handRef.name}</div>
+                      <div className="foot">
+                        <div className="mark">{handRef.mark}</div>
+                        <div className="number">{number}</div>
+                      </div>
+                    </div>
+                  </div>
+                </Animation>
+              )}
+            </Transition>
+          )}
         </Card>
-        {enter ? (
+        {enter || state ? (
           <></>
         ) : (
           <div>
@@ -95,7 +109,16 @@ const MyHand = () => {
 export default MyHand
 
 const Animation = styled.div<{ state: TransitionStatus }>`
-  transition: all 0.5s ease;
+  transition: 0.2s;
   transform: rotateY(${({ state }) => (state === 'entering' ? -180 : 0)}deg);
-  opacity: ${({ state }) => (state === 'entering' ? 0 : 1)};
+  .back {
+    transition: opacity 0.3s, transform 0.2s ease-in;
+    opacity: ${({ state }) => (state === 'exiting' ? 0 : 1)};
+    transform: translateY(${({ state }) => (state === 'exiting' ? -50 : 0)}px);
+  }
+  .front {
+    transform: rotateY(180deg);
+    transition: opacity 0.2s;
+    opacity: ${({ state }) => (state === 'entering' ? 1 : 0)};
+  }
 `

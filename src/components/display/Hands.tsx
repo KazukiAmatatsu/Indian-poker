@@ -32,6 +32,11 @@ const Hands = () => {
                       <div className="number">{number}</div>
                       <div className="mark">{data.mark}</div>
                     </div>
+                    {data.enter && !roomInfo.finished ? (
+                      <span className="enterRibbon">決定</span>
+                    ) : (
+                      <></>
+                    )}
                     <div className="userName">{data.name}</div>
                     <div className="foot">
                       <div className="mark">{data.mark}</div>
