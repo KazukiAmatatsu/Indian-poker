@@ -84,7 +84,7 @@ const MyHand = () => {
             </Transition>
           )}
         </Card>
-        {enter ? (
+        {enter || state ? (
           <></>
         ) : (
           <div>
