@@ -1,34 +1,29 @@
 import { db } from 'config/firebase'
+import { Room } from 'recoil/atom'
 import { SetTrump } from 'components/SetTrump'
 
-// userIdとroomIdを引数に渡したらカードを一枚引く関数
-export const Draw = async (userId: string, roomId: string) => {
+export const Draw = async (userId: string, roomInfo: Room) => {
+  const roomId = roomInfo.roomId
   const roomRef = db.collection('room').doc(roomId)
-  const trumpRef = roomRef.collection('trump')
-  const drawRef = trumpRef.limit(1)
+  const trump = roomInfo.trump
+  const newCard = trump[0]
 
-  const deck = await trumpRef.get()
-  const deckList = deck.docs.map((doc) => doc.id)
-
-  /* もしカードが残り0枚ならもう一度セットトランプする */
-  if (deckList.length === 0) {
-    await SetTrump(roomId)
-    alert('トランプをリセットしました！')
-  }
-
-  /* カードを1枚引く */
-  await drawRef
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        roomRef.update({
-          [`member.${userId}.mark`]: doc.data().mark,
-          [`member.${userId}.number`]: doc.data().number
-        })
-        trumpRef.doc(doc.id).delete()
+  if (newCard) {
+    if (trump.length === 2) {
+      const newTrump = SetTrump()
+      await roomRef.update({
+        trump: newTrump,
+        [`member.${userId}.mark`]: newCard.mark,
+        [`member.${userId}.number`]: newCard.number
       })
-    })
-    .catch((e) => {
-      console.log(e)
-    })
+      alert('トランプをリセットされました！')
+    } else {
+      const remTrump = trump.filter((item, index) => index !== 0)
+      await roomRef.update({
+        trump: remTrump,
+        [`member.${userId}.mark`]: newCard.mark,
+        [`member.${userId}.number`]: newCard.number
+      })
+    }
+  }
 }

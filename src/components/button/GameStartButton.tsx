@@ -28,13 +28,13 @@ const GameStartButton = () => {
       .update({
         [`member.${userId}.isReady`]: true
       })
-    await Draw(userId, roomId)
+    await Draw(userId, roomInfo)
     setReady(true)
   }
 
   const GameStart = async () => {
     const roomRef = db.collection('room').doc(roomId)
-    await Draw(userId, roomId)
+    await Draw(userId, roomInfo)
     await roomRef.update({
       isGaming: true
     })

@@ -33,7 +33,6 @@ export const FireStoreToRecoil: FC = ({ children }) => {
       /* リロード等でroomInfoが初期化されてる場合があるのでここはidから取得 */
       if (id) {
         const roomRef = db.collection('room').doc(id)
-        const trumpRef = roomRef.collection('trump')
         /* roomInfoからだとなぜかmember{}の中身だけがうまく取得できない */
         /* ここでFireStoreから再度データを取り直し */
         roomRef.get().then((doc) => {
@@ -41,11 +40,6 @@ export const FireStoreToRecoil: FC = ({ children }) => {
           const memberId = member && Object.keys(member).length
           if (memberId === 1) {
             alert('プレイヤーがいなくなったため、部屋は削除されました')
-            trumpRef.get().then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                trumpRef.doc(doc.id).delete()
-              })
-            })
             roomRef.delete()
           } else {
             alert('ルームから退出しました')
@@ -58,6 +52,7 @@ export const FireStoreToRecoil: FC = ({ children }) => {
           roomId: '',
           inviteCode: '',
           member: {},
+          trump: [],
           isGaming: false,
           finished: false,
           loading: false
