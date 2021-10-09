@@ -20,7 +20,7 @@ const MyHand = () => {
       setState(true)
       setTimeout(async () => {
         setState(false)
-        await Draw(userId, roomId)
+        await Draw(userId, roomInfo)
       }, 1200)
     } else {
       alert('もう決定しているのでカードを変えることはできません')

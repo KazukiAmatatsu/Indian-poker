@@ -24,10 +24,16 @@ export type Member = {
   }
 }
 
+export type Trump = {
+  mark: string
+  number: number
+}
+
 export type Room = {
   readonly roomId: string
   readonly inviteCode: string
   member: Member | undefined
+  trump: Trump[]
   isGaming: boolean
   finished: boolean
   loading: boolean
@@ -39,6 +45,7 @@ export const room = atom<Room>({
     roomId: '',
     inviteCode: '',
     member: {},
+    trump: [],
     isGaming: false,
     finished: false,
     loading: false

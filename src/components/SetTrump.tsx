@@ -1,17 +1,16 @@
-import { db } from 'config/firebase'
-
-export const SetTrump = async (roomId: string) => {
-  const trumpRef = db.collection('room').doc(roomId).collection('trump')
-
-  /* トランプをFireStoreに追加する */
+export const SetTrump = () => {
+  let trump = []
   const mark = ['♠', '♥', '♦', '♣']
   for (let i = 1; i < 14; i++) {
     for (let m = 0; m < 4; m++) {
-      await trumpRef.add({
-        mark: mark[m],
-        number: i
-      })
+      trump.push({ mark: mark[m], number: i })
     }
   }
-  /* console.log('トランプできたよ') */
+
+  for (let i = trump.length - 1; i >= 0; i--) {
+    const random = Math.floor(Math.random() * (i + 1))
+    ;[trump[i], trump[random]] = [trump[random], trump[i]]
+  }
+
+  return trump
 }
