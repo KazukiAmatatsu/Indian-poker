@@ -25,7 +25,7 @@ const Hands = () => {
 
           if (key !== userInfo.id) {
             return (
-              <Card red={data.mark === '♥' || data.mark === '♦'}>
+              <Card key={key} red={data.mark === '♥' || data.mark === '♦'}>
                 <div className="cardFrame">
                   <div className="front">
                     <div className="head">
@@ -47,7 +47,7 @@ const Hands = () => {
               </Card>
             )
           } else {
-            return <></>
+            return <div key={key}></div>
           }
         })}
     </div>

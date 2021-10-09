@@ -16,6 +16,7 @@ const HostButton = () => {
   const createRoom = async () => {
     const roomId = db.collection('room').doc().id
     const inviteCode = code()
+    const trump = SetTrump()
     await db
       .collection('room')
       .doc(roomId)
@@ -32,11 +33,11 @@ const HostButton = () => {
             enter: false
           }
         },
+        trump,
         isGaming: false,
         finished: false,
         loading: false
       })
-    await SetTrump(roomId)
     setRoomInfo({
       ...roomInfo,
       roomId: roomId,
